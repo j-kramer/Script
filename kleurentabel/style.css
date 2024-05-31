@@ -1,0 +1,15 @@
+#kleurentabel {
+    color: white;
+}
+
+#kleurentabel td.red {
+    background-color: red;
+}
+
+#kleurentabel td.green {
+    background-color: green;
+}
+
+#kleurentabel td.blue {
+    background-color: blue;
+}
