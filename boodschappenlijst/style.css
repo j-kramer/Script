@@ -1,17 +1,14 @@
 #boodschappenlijst {
     font-family: sans-serif;
     border-collapse: collapse;
-}
-
-#boodschappenlijst th, td {
-    border: 1px solid #888;
-    padding: 10px;
-}
-
-#boodschappenlijst th {
-    text-align:left;
-}
-
-#boodschappenlijst td.price {
     text-align:right;
+
+    th, td {
+        border: 1px solid #888;
+        padding: 10px;
+    }
+
+    th, .productName {
+        text-align:left;
+    }
 }

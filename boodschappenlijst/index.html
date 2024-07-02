@@ -18,36 +18,45 @@
         </thead>
         <tbody>
             <tr>
-                <td>Brood</td>
-                <td class="price">1.00</td>
-                <td>1</td>
-                <td class="price">1.00</td>
+                <td class="productName">Brood</td>
+                <td class="productPrice">1.00</td>
+                <td>
+                    <input type="number" id="broodNumber" name="BroodNumber" value="0" min="0" class="productQuantity"/>
+                </td>
+                <td class="productTotalCost">0</td>
             </tr>
             <tr>
-                <td>Broccoli</td>
-                <td class="price">0.99</td>
-                <td>2</td>
-                <td class="price">1.98</td>
+                <td class="productName">Broccoli</td>
+                <td class="productPrice">0.99</td>
+                <td>
+                    <input type="number" id="broccoliNumber" name="BroccoliNumber" value="0" min="0" class="productQuantity"/>
+                </td>
+                <td class="productTotalCost">0</td>
             </tr>
             <tr>
-                <td>Krentebollen</td>
-                <td class="price">1.20</td>
-                <td>4</td>
-                <td class="price">4.80</td>
+                <td class="productName">Krentebollen</td>
+                <td class="productPrice">1.20</td>
+                <td>
+                    <input type="number" id="KrentenbollenNumber" name="KrentenbollenNumber" value="0" min="0" class="productQuantity"/>
+                </td>
+                <td class="productTotalCost">0</td>
             </tr>
             <tr>
-                <td>Noten</td>
-                <td class="price">2.99</td>
-                <td>0</td>
-                <td class="price">0.00</td>
+                <td class="productName">Noten</td>
+                <td class="productPrice">2.99</td>
+                <td>
+                    <input type="number" id="notenNumber" name="notenNumber" value="0" min="0" class="productQuantity"/>
+                </td>
+                <td class="productTotalCost">0</td>
             </tr>
         </tbody>
         <tfoot>
             <tr>
                 <th scope="row" colspan="3">Totaal</th>
-                <td class="price">7.78</td>
+                <td id="totalCost">0</td>
             </tr>
         </tfoot>
     </table>
+    <script src="script.js"></script>
 </body>
 </html>
