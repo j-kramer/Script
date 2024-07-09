@@ -7,25 +7,11 @@
     <title>Javascript Yahtzee</title>
 </head>
 <body>
-    <div class="centered">
-        <table>
-            <tr>
-                <td class="dobbelsteen">
-                </td>
-                <td class="dobbelsteen">
-                </td>
-                <td class="dobbelsteen">
-                </td>
-                <td class="dobbelsteen">
-                </td>
-                <td class="dobbelsteen">
-                </td>
-            </tr>
-        </table>
-        <button id="gooiButton">Gooien!</button>
-        <table id="yahtzeeScores">
-            <tr>
-                <th colspan="2">Enkele Dobbelstenen scores</th>
+    <div id="yahtzee">
+        <h1>Yahtzee</h1>
+        <table class="center" id="yahtzeeScores">
+            <tr class="head">
+                <th colspan="2">Simpele scores</th>
             </tr>
             <tr>
                 <th>1</th>
@@ -51,7 +37,7 @@
                 <th>6</th>
                 <td class="singleDiceScore">0</td>
             </tr>
-            <tr>
+            <tr class="head">
                 <th colspan="2">Combinatie scores</th>
             </tr>
             <tr>
@@ -83,6 +69,22 @@
                 <td class="comboDiceScore">0</td>
             </tr>
         </table>
+        <h2>Dobbelstenen:</h2>
+        <table class="center">
+            <tr>
+                <td class="dobbelsteen">1
+                </td>
+                <td class="dobbelsteen">1
+                </td>
+                <td class="dobbelsteen">1
+                </td>
+                <td class="dobbelsteen">1
+                </td>
+                <td class="dobbelsteen">1
+                </td>
+            </tr>
+        </table>
+        <button id="gooiButton">Gooien!</button>
     </div>
     <script src="script.js"></script>
 </body>
