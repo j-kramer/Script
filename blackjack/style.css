@@ -1,0 +1,10 @@
+#dealerKaarten, #spelerKaarten {
+    min-width: 200px;
+    max-width: 70%;
+    min-height: 150px;
+    background-color: green;
+}
+
+.button {
+    margin-top: 1rem;
+}
