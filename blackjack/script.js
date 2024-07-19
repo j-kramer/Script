@@ -216,12 +216,13 @@ function pas() {
     showScore(dealerScore, score);
     if (score > 21 || score < playerScore) {
         showPlayerWins();
-    }
-    if (score > playerScore) {
-        showPlayerLoses();
-    }
-    if (score == playerScore) {
-        showPlayerDraw();
+    } else {
+        if (score > playerScore) {
+            showPlayerLoses();
+        }
+        if (score == playerScore) {
+            showPlayerDraw();
+        }
     }
     updateButtons();
 }
