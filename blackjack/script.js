@@ -167,7 +167,7 @@ function delen() {
 
     showDealerHand();
     showHand(playerCards, game.playerHand);
-    showScore(dealerScore,"");
+    showScore(dealerScore, "");
     showScore(playerScore, calculateScore(game.playerHand));
 }
 
@@ -179,7 +179,7 @@ function resetGame() {
 
     // Clear existing hands
     dealerCards.innerHTML = '';
-    playerCards.innerHTML= '';
+    playerCards.innerHTML = '';
 
     updateButtons();
 }
@@ -189,11 +189,11 @@ function hit() {
     let score = calculateScore(game.playerHand);
     showScore(playerScore, score);
     if (score == 21) {
-	    game.started = false;
+        game.started = false;
         showPlayerWins();
     }
     if (score > 21) {
-	    game.started = false;
+        game.started = false;
         showPlayerLoses();
     }
     updateButtons();
