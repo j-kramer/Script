@@ -1,0 +1,14 @@
+#boodschappenlijst {
+    font-family: sans-serif;
+    border-collapse: collapse;
+    text-align:right;
+
+    th, td {
+        border: 1px solid #888;
+        padding: 10px;
+    }
+
+    th, .productName {
+        text-align:left;
+    }
+}
