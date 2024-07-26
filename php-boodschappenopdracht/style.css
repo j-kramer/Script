@@ -12,3 +12,41 @@
         text-align:left;
     }
 }
+
+.wrapper {
+    width: 940px;
+    margin: 0px auto;
+}
+
+nav {
+    background-color: lightgreen;
+    li {
+        display: inline;
+
+        a {
+            color: green;
+        }
+
+        a.current {
+            color: darkgreen;
+        }
+    }
+}
+
+fieldset {
+    width: 310px;
+
+    label {
+        float: left;
+        width: 120px;
+    }
+
+    input {
+        text-align: right;
+    }
+}
+
+.submit {
+    margin-top: 10px;
+    text-align: right;
+}
