@@ -1,12 +1,10 @@
 <?php
 include "functions.php";
+include "config.php";
+include "Database.php";
 
-$groceries = [
-    ["Brood", 1, 1.00],
-    ["Broccoli", 2, 0.99],
-    ["Krentebollen", 4, 1.20],
-    ["Noten", 0, 2.99]
-];
+$database = new Database($database_config["source"], $database_config["username"], $database_config["password"]);
+$groceries = $database->query("SELECT name, number, price FROM groceries")->fetchAll();
 
 function sum($carry, $item) {
     [, $amount, $price] = $item;
