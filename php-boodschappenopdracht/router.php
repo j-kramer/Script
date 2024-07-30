@@ -1,16 +1,16 @@
 <?php
-include "routes.php";
+require "routes.php";
 
 function routeToController(string $uri, array $routes) {
     if (array_key_exists($uri,$routes)) {
-        include $routes[$uri];
+        require $routes[$uri];
     } else {
         abort();
     }
 }
 
 function abort() {
-    include "views/404.php";
+    require "views/404.php";
     die();
 }
 ?>

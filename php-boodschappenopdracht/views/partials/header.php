@@ -12,5 +12,5 @@
     <div class="wrapper">
         <header>
             <h1>PHP Boodschappenlijst</h1>
-            <?php include "views/partials/nav.php";?>
+            <?php require "views/partials/nav.php";?>
         </header>

@@ -1,7 +1,8 @@
 <?php
-include "functions.php";
-include "config.php";
-include "Database.php";
+require "functions.php";
+
+require "config.php";
+require "Database.php";
 
 $database = new Database($database_config["source"], $database_config["username"], $database_config["password"]);
 $groceries = $database->query("SELECT name, amount, price FROM groceries")->fetchAll();
@@ -14,4 +15,4 @@ function sum($carry, $item) {
 
 $totalprice = array_reduce($groceries, "sum");
 
-include "views/index.view.php";
+require "views/index.view.php";

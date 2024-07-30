@@ -1,8 +1,8 @@
 <?php
-include "functions.php";
+require "functions.php";
 
-include "config.php";
-include "Database.php";
+require "config.php";
+require "Database.php";
 
 $database = new Database($database_config["source"], $database_config["username"], $database_config["password"]);
 
@@ -12,4 +12,4 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
     exit;
 }
 
-include "views/create.view.php";
+require "views/create.view.php";

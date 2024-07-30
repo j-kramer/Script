@@ -1,4 +1,4 @@
-<?php include "views/partials/header.php"; ?>
+<?php require "views/partials/header.php"; ?>
 <table id="boodschappenlijst">
     <thead>
         <tr>
@@ -25,4 +25,4 @@
         </tr>
     </tfoot>
 </table>
-<?php include "views/partials/footer.php"; ?>
+<?php require "views/partials/footer.php"; ?>

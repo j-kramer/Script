@@ -1,4 +1,4 @@
-<?php include "views/partials/header.php"; ?>
+<?php require "views/partials/header.php"; ?>
 <form action="/create" method="post">
     <fieldset>
         <legend>Add groceries</legend>
@@ -14,4 +14,4 @@
         <div class="submit"><input type="submit" value="Add" /></div>
     </fieldset>
 </form>
-<?php include "views/partials/footer.php"; ?>
+<?php require "views/partials/footer.php"; ?>
