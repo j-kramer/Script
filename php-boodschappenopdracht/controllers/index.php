@@ -4,7 +4,7 @@ include "config.php";
 include "Database.php";
 
 $database = new Database($database_config["source"], $database_config["username"], $database_config["password"]);
-$groceries = $database->query("SELECT name, number, price FROM groceries")->fetchAll();
+$groceries = $database->query("SELECT name, amount, price FROM groceries")->fetchAll();
 
 function sum($carry, $item) {
     [, $amount, $price] = $item;

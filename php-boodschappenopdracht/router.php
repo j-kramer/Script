@@ -1,8 +1,5 @@
 <?php
-$routes = [
-    "/" => "controllers/index.php",
-    "/create" => "controllers/create.php"
-];
+include "routes.php";
 
 function routeToController(string $uri, array $routes) {
     if (array_key_exists($uri,$routes)) {
