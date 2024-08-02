@@ -2,7 +2,7 @@
 require "functions.php";
 
 require "config.php";
-require "Database.php";
+require "database.php";
 
 $database = new Database($database_config["source"], $database_config["username"], $database_config["password"]);
 
