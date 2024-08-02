@@ -44,10 +44,21 @@ fieldset {
 
     input {
         text-align: right;
+        margin-bottom: 2px;
+    }
+
+    p {
+        margin: 0% auto;
+        text-align: right;
+        color: red;
+    }
+
+    .invalid {
+        border-color: red;
     }
 }
 
 .submit {
-    margin-top: 10px;
+    margin-top: 8px;
     text-align: right;
 }
