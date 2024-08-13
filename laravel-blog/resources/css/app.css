@@ -1,0 +1,21 @@
+.wrapper {
+    width: 940px;
+    margin: 0 auto;
+    background-color: #d7eaea;
+}
+
+nav {
+    background-color: #acdbdf;
+
+    li {
+        display: inline;
+        a {
+            color: #9692af;
+        }
+        a:hover {
+            color: #69779b;
+        }
+    }
+}
+
+/* palette colors #69779b, #9692af, #acdbdf, #d7eaea */
