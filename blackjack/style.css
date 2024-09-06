@@ -1,4 +1,4 @@
-#dealerKaarten, #spelerKaarten {
+.playerHand {
     min-width: 200px;
     max-width: 70%;
     min-height: 150px;
