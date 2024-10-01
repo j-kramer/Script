@@ -20,7 +20,7 @@
                         {{ __('Dashboard') }}
                     </x-nav-link>
                     <x-nav-link :href="route('articles.index')" :active="request()->routeIs('articles.index')">
-                        {{ __('Articles') }}
+                        {{ __('My Articles') }}
                     </x-nav-link>
                     @endauth
                 </div>
@@ -94,7 +94,7 @@
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('articles.index')" :active="request()->routeIs('articles.index')">
-                {{ __('Articles') }}
+                {{ __(' My Articles') }}
             </x-responsive-nav-link>
             @endauth
         </div>

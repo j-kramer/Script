@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Article;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreArticleRequest;
+use App\Http\Requests\UpdateArticleRequest;
+use Illuminate\Auth\Events\Validated;
 
 class ArticleController extends Controller
 {
@@ -43,7 +45,9 @@ class ArticleController extends Controller
      */
     public function show(Article $article)
     {
-        //
+        return view('articles.view', [
+            'article' => $article,
+        ]);
     }
 
     /**
@@ -51,15 +55,21 @@ class ArticleController extends Controller
      */
     public function edit(Article $article)
     {
-        //
+        return view('articles.edit', [
+            'article' => $article,
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Article $article)
+    public function update(UpdateArticleRequest $request, Article $article)
     {
-        //
+        $validated = $request->validated();
+
+        $article->update($validated);
+
+        return redirect()->route('articles.index');
     }
 
     /**
@@ -67,6 +77,8 @@ class ArticleController extends Controller
      */
     public function destroy(Article $article)
     {
-        //
+        $article->delete();
+
+        return redirect()->route('articles.index');
     }
 }
