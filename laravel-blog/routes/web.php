@@ -12,7 +12,8 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::resource('articles', ArticleController::class)->middleware(['auth']);
+Route::resource('articles', ArticleController::class)->only('show');
+Route::resource('articles', ArticleController::class)->except('show')->middleware(['auth']);
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

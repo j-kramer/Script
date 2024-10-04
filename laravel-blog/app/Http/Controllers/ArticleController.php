@@ -8,6 +8,9 @@ use App\Http\Requests\StoreArticleRequest;
 use App\Http\Requests\UpdateArticleRequest;
 use Illuminate\Auth\Events\Validated;
 
+use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Auth;
+
 class ArticleController extends Controller
 {
     /**
@@ -15,8 +18,10 @@ class ArticleController extends Controller
      */
     public function index()
     {
+        Gate::authorize('viewAny', Article::class);
+
         return view('articles.index', [
-            'articles' => Article::with('user')->latest()->get(),
+            'articles' => Article::with('user')->where('user_id', Auth::id())->latest()->get(),
         ]);
     }
 
@@ -25,6 +30,8 @@ class ArticleController extends Controller
      */
     public function create()
     {
+        Gate::authorize('create', Article::class);
+
         return view('articles.create');
     }
 
@@ -33,6 +40,8 @@ class ArticleController extends Controller
      */
     public function store(StoreArticleRequest $request)
     {
+        Gate::authorize('create', Article::class);
+
         $validated = $request->validated();
 
         $request->user()->articles()->create($validated);
@@ -45,6 +54,8 @@ class ArticleController extends Controller
      */
     public function show(Article $article)
     {
+        Gate::authorize('view', $article);
+
         return view('articles.view', [
             'article' => $article,
         ]);
@@ -55,6 +66,8 @@ class ArticleController extends Controller
      */
     public function edit(Article $article)
     {
+        Gate::authorize('update', $article);
+
         return view('articles.edit', [
             'article' => $article,
         ]);
@@ -65,6 +78,8 @@ class ArticleController extends Controller
      */
     public function update(UpdateArticleRequest $request, Article $article)
     {
+        Gate::authorize('update', $article);
+
         $validated = $request->validated();
 
         $article->update($validated);
@@ -77,6 +92,8 @@ class ArticleController extends Controller
      */
     public function destroy(Article $article)
     {
+        Gate::authorize('delete', $article);
+
         $article->delete();
 
         return redirect()->route('articles.index');
