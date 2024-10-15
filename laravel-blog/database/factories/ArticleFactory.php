@@ -22,6 +22,15 @@ class ArticleFactory extends Factory
             'user_id' => User::inRandomOrder()->first()->id,
             'title' => $this->faker->sentence,
             'content' => $this->faker->paragraphs(3, true),
+            'image_path' => null,
         ];
+    }
+
+    public function withImage(string $image_path): Factory {
+        return $this->state(function (array $attributes) use ($image_path) {
+            return [
+                'image_path' => $image_path,
+            ];
+        });
     }
 }

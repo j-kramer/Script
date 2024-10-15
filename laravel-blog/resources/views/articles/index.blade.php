@@ -5,8 +5,13 @@
         </a>
         <div class="mt-6 bg-white shadow-sm rounded-lg divide-y">
             @foreach ($articles as $article)
-            <article class="p-6 flex flex-row space-x-2">
-                <div class="flex-1">
+            <article class="flex flex-row space-x-2">
+                @isset($article->image_path)
+                <div class="shrink-0">
+                    <img class="h-full w-32 object-cover" src="{{ asset($article->image_path) }}" alt="{{ $article->title }}">
+                </div>
+                @endisset
+                <div class="p-6 flex-1">
                         <a href="{{ route('articles.show', $article) }}"><h1 class="text-lg text-gray-900">{{ $article->title }}</h1>
                         </a>
                         <small class="ml-2 text-sm text-gray-600">{{ $article->created_at->format('j M Y, g:i a') }}</small>

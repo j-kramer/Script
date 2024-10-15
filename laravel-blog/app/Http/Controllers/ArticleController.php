@@ -10,6 +10,7 @@ use Illuminate\Auth\Events\Validated;
 
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class ArticleController extends Controller
 {
@@ -43,6 +44,10 @@ class ArticleController extends Controller
         Gate::authorize('create', Article::class);
 
         $validated = $request->validated();
+
+        if (isset($validated['image'])) {
+            $validated['image_path'] = $validated['image']->store('images');
+        }
 
         $request->user()->articles()->create($validated);
 
@@ -81,6 +86,11 @@ class ArticleController extends Controller
         Gate::authorize('update', $article);
 
         $validated = $request->validated();
+
+        if (isset($validated['image'])) {
+            Storage::delete($article->image_path);
+            $validated['image_path'] = $validated['image']->store('images');
+        }
 
         $article->update($validated);
 

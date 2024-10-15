@@ -24,6 +24,7 @@ class UpdateArticleRequest extends FormRequest
         return [
             'title' => 'required|string|max:255',
             'content' => 'required|string',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,svg|max:2048|dimensions:min_width=320',
         ];
     }
 }

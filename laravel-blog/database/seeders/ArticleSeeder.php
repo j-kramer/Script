@@ -15,5 +15,6 @@ class ArticleSeeder extends Seeder
     public function run(): void
     {
         Article::factory()->count(5)->create();
+        Article::factory()->withImage('y.svg')->count(5)->create();
     }
 }
