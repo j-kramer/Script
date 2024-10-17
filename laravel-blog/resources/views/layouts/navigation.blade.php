@@ -23,6 +23,9 @@
                         {{ __('My Articles') }}
                     </x-nav-link>
                     @endauth
+                    <x-nav-link :href="route('categories.index')" :active="request()->routeIs('categories.index')">
+                        {{ __('Categories') }}
+                    </x-nav-link>
                 </div>
             </div>
 
@@ -97,6 +100,9 @@
                 {{ __(' My Articles') }}
             </x-responsive-nav-link>
             @endauth
+            <x-responsive-nav-link :href="route('categories.index')" :active="request()->routeIs('categories.index')">
+                {{ __(' Categories') }}
+            </x-responsive-nav-link>
         </div>
 
         <!-- Responsive Settings Options -->

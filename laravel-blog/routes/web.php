@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -14,6 +15,9 @@ Route::get('/dashboard', function () {
 
 Route::resource('articles', ArticleController::class)->middleware('auth')->except('show');
 Route::get('articles/{article}', [ArticleController::class, 'show'])->name('articles.show');
+
+Route::get('categories', [CategoryController::class, 'index'])->name('categories.index');
+Route::resource('categories', CategoryController::class)->middleware('auth')->only(['store', 'destroy']);
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
