@@ -10,8 +10,19 @@
                 <x-input-error :messages="$errors->get('title')" class="mt-2" />
             </div>
 
-             <!-- Image -->
-             <div>
+            <!-- Categories -->
+            <div>
+                <x-input-label for="category" :value="__('Categories')" />
+                <select name="categories[]" id="category" multiple>
+                    @foreach($categories as $category)
+                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+                    @endforeach
+                </select>
+                <x-input-error :messages="$errors->get('categories')" class="mt-2" />
+            </div>
+
+            <!-- Image -->
+            <div>
                 <x-input-label for="image" :value="__('Image')" />
                 <x-text-input id="image" class="block mt-1 w-full" type="file" accept=".jpeg,.png,.jpg,.svg" name="image" placeholder="{{ __('Your article image') }}" autofocus />
                 <x-input-error :messages="$errors->get('image')" class="mt-2" />

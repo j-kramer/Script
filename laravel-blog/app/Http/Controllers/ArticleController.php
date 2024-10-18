@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Article;
+use App\Models\Category;
+
 use Illuminate\Http\Request;
-use App\Http\Requests\StoreArticleRequest;
-use App\Http\Requests\UpdateArticleRequest;
+use App\Http\Requests\ArticleRequest;
 use Illuminate\Auth\Events\Validated;
 
 use Illuminate\Support\Facades\Gate;
@@ -22,7 +23,7 @@ class ArticleController extends Controller
         Gate::authorize('viewAny', Article::class);
 
         return view('articles.index', [
-            'articles' => Article::with('user')->where('user_id', Auth::id())->latest()->get(),
+            'articles' => Article::with(['user', 'categories'])->where('user_id', Auth::id())->latest()->get(),
         ]);
     }
 
@@ -33,13 +34,15 @@ class ArticleController extends Controller
     {
         Gate::authorize('create', Article::class);
 
-        return view('articles.create');
+        return view('articles.create', [
+            'categories' => Category::all(),
+        ]);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreArticleRequest $request)
+    public function store(ArticleRequest $request)
     {
         Gate::authorize('create', Article::class);
 
@@ -49,7 +52,11 @@ class ArticleController extends Controller
             $validated['image_path'] = $validated['image']->store('images');
         }
 
-        $request->user()->articles()->create($validated);
+        $article = $request->user()->articles()->create($validated);
+
+        if (isset($validated['categories'])) {
+            $article->categories()->attach($validated['categories']);
+        }
 
         return redirect()->route('articles.index');
     }
@@ -74,14 +81,15 @@ class ArticleController extends Controller
         Gate::authorize('update', $article);
 
         return view('articles.edit', [
-            'article' => $article,
+            'article' => $article->load('categories'),
+            'categories' => Category::all(),
         ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateArticleRequest $request, Article $article)
+    public function update(ArticleRequest $request, Article $article)
     {
         Gate::authorize('update', $article);
 
@@ -93,6 +101,13 @@ class ArticleController extends Controller
         }
 
         $article->update($validated);
+
+        // we need to check if the categories key exists, it might not if the user hasn't selected any
+        if (isset($validated['categories'])) {
+            $article->categories()->sync($validated['categories']);
+        } else {
+            $article->categories()->detach();
+        }
 
         return redirect()->route('articles.index');
     }

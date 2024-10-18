@@ -3,6 +3,11 @@
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ $article->title }}
         </h2>
+        <h4>
+            Categories: @foreach ($article->categories as $category)
+            <a href="{{ route('categories.show', $category) }}">{{ $category->name }}</a>
+            @endforeach
+        </h4>
     </x-slot>
 
     <div class="py-12">

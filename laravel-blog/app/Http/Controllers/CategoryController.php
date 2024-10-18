@@ -44,7 +44,9 @@ class CategoryController extends Controller
      */
     public function show(Category $category)
     {
-        //
+        return view('categories.show', [
+            'category' => $category->load('articles'),
+        ]);
     }
 
     /**
@@ -58,7 +60,7 @@ class CategoryController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(CategoryRequest $request, Category $category)
+    public function update(Request $request, Category $category)
     {
         //
     }

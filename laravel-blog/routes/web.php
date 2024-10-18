@@ -18,6 +18,7 @@ Route::get('articles/{article}', [ArticleController::class, 'show'])->name('arti
 
 Route::get('categories', [CategoryController::class, 'index'])->name('categories.index');
 Route::resource('categories', CategoryController::class)->middleware('auth')->only(['store', 'destroy']);
+Route::get('categories/{category}', [CategoryController::class, 'show'])->name('categories.show');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

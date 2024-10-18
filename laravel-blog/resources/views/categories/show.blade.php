@@ -1,10 +1,13 @@
 <x-app-layout>
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            Category: {{ $category->name }}
+        </h2>
+    </x-slot>
+
     <div class="max-w-2xl mx-auto p-4 sm:p-6 lg:p-8">
-        <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('articles.create') }}">
-            <x-primary-button>{{ __('Create an Article') }}</x-primary-button>
-        </a>
         <div class="mt-6 bg-white shadow-sm rounded-lg divide-y">
-            @foreach ($articles as $article)
+            @foreach ($category->articles as $article)
             <article class="flex flex-row space-x-2">
                 @isset($article->image_path)
                 <div class="shrink-0">
@@ -26,7 +29,7 @@
                         @endforeach
                     </small>
                 </div>
-                @if ($article->user->is(auth()->user()))
+                @canany(['update', 'delete'], $article)
                 <div class="inline-flex items-center">
                     <a href="{{ route('articles.edit', $article) }}"><x-edit-icon /></a>
                     <button
@@ -60,7 +63,7 @@
                         </form>
                     </x-modal>
                 </div>
-                @endif
+                @endcanany
             </article>
             @endforeach
         </div>

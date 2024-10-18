@@ -11,8 +11,21 @@
                 <x-input-error :messages="$errors->get('title')" class="mt-2" />
             </div>
 
-             <!-- Image -->
-             <div>
+            <!-- Categories -->
+            <div>
+                <x-input-label for="category" :value="__('Categories')" />
+                <select name="categories[]" id="category" multiple>
+                    @foreach($categories as $category)
+                    <option value="{{ $category->id }}" {{ $article->categories->contains($category) ? 'selected' : '' }}>
+                        {{ $category->name }}
+                    </option>
+                    @endforeach
+                </select>
+                <x-input-error :messages="$errors->get('categories')" class="mt-2" />
+            </div>
+
+            <!-- Image -->
+            <div>
                 <x-input-label for="image" :value="__('Image')" />
                 @isset($article->image_path)
                 <img src="{{ asset($article->image_path) }}" alt="{{ $article->title }}">
@@ -27,7 +40,7 @@
                 <x-textarea id="content" class="block mt-1 w-full h-40" name="content" placeholder="{{ __('Your article content') }}" required>{{ old('content', $article->content) }}</x-textarea>
                 <x-input-error :messages="$errors->get('content')" class="mt-2" />
             </div>
-            
+
             <div class="flex items-center justify-end mt-4">
                 <a href="{{ route('articles.index') }}">{{ __('Cancel') }}</a>
                 <x-primary-button class="ms-4">

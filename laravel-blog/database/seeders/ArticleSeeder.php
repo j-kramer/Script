@@ -6,6 +6,7 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 use App\Models\Article;
+use App\Models\Category;
 
 class ArticleSeeder extends Seeder
 {
@@ -14,7 +15,14 @@ class ArticleSeeder extends Seeder
      */
     public function run(): void
     {
-        Article::factory()->count(5)->create();
-        Article::factory()->withImage('y.svg')->count(5)->create();
+        $categories = Category::all();
+        $categoryCount = Category::count();
+
+        Article::factory(10)->create();
+        Article::factory(10)->withImage('y.svg')->create();
+
+        Article::all()->each(function (Article $article) use (&$categories, $categoryCount) {
+            $article->categories()->sync($categories->random(rand(0,$categoryCount)));
+        });
     }
 }
