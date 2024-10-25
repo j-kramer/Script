@@ -23,7 +23,7 @@ class ArticleController extends Controller
         Gate::authorize('viewAny', Article::class);
 
         return view('articles.index', [
-            'articles' => Article::with(['user', 'categories'])->where('user_id', Auth::id())->latest()->get(),
+            'articles' => Article::with(['categories'])->where('user_id', Auth::id())->latest()->get(),
         ]);
     }
 

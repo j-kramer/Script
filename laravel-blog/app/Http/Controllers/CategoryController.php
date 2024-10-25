@@ -45,7 +45,11 @@ class CategoryController extends Controller
     public function show(Category $category)
     {
         return view('categories.show', [
-            'category' => $category->load('articles'),
+            'category' => $category->load([
+                'articles' => [
+                    'user:id,name',
+                    'categories:id,name',
+                ]]),
         ]);
     }
 
