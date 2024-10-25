@@ -70,3 +70,4 @@
     </article>
     @endforeach
 </div>
+{{ $articles->links() }}

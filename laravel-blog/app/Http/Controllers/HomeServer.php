@@ -14,7 +14,7 @@ class HomeServer extends Controller
     public function __invoke(Request $request)
     {
         return view('home', [
-            'articles' => Article::with(['user', 'categories'])->latest()->get(),
+            'articles' => Article::with(['user:id,name', 'categories:id,name'])->latest()->paginate(10),
         ]);
     }
 }
