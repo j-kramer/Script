@@ -34,6 +34,15 @@
                 <x-input-error :messages="$errors->get('image')" class="mt-2" />
             </div>
 
+            <!-- Premium -->
+            <div class="block mt-4">
+                <label for="premium" class="inline-flex items-center">
+                    <input type="checkbox" id="premium" name="is_premium_content" value="true" @checked(old('is_premium_content', $article)) />
+                    <span class="ms-2 text-sm text-gray-600">{{ __('Is premium content') }}</span>
+                </label>
+                <x-input-error :messages="$errors->get('is_premium_content')" class="mt-2" />
+            </div>
+
             <!-- Content -->
             <div class="mt-4">
                 <x-input-label for="content" :value="__('Content')" />

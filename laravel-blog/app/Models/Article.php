@@ -14,6 +14,7 @@ class Article extends Model
         'title',
         'content',
         'image_path',
+        'is_premium_content'
     ];
 
     public function user() {

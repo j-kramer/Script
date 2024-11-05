@@ -21,6 +21,9 @@
             @unless ($article->created_at->eq($article->updated_at))
             <small class="text-sm text-gray-600"> &middot; {{ __('edited') }}</small>
             @endunless
+            @if ($article->is_premium_content)
+            <small class="text-sm text-red-600"> &middot; {{ __('premium') }}</small>
+            @endif
             <br />
             <small>
                 Categories: @foreach ($article->categories as $category)

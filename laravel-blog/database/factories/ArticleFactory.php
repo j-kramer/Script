@@ -23,6 +23,7 @@ class ArticleFactory extends Factory
             'title' => $this->faker->sentence,
             'content' => $this->faker->paragraphs(3, true),
             'image_path' => null,
+            'is_premium_content' => $this->faker->boolean(),
         ];
     }
 
