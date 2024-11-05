@@ -97,7 +97,9 @@ class ArticleController extends Controller
         $validated = $request->validated();
 
         if (isset($validated['image'])) {
-            Storage::delete($article->image_path);
+            if (isset($article->image_path)) {
+                Storage::delete($article->image_path);
+            }
             $validated['image_path'] = $validated['image']->store('images');
         }
 
