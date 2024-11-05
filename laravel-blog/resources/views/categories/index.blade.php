@@ -8,7 +8,9 @@
             <h1>All Categories:</h1>
             <ul class="list-disc">
                 @foreach ($categories as $category)
-                <a href="{{ route('categories.show', $category) }}"><li>{{ $category->name }} @auth<button
+                <li><a href="{{ route('categories.show', $category) }}">{{ $category->name }}</a>
+                    @auth
+                    <button
                         x-data=""
                         x-on:click.prevent="$dispatch('open-modal', 'confirm-category-deletion-{{ $loop->index }}')">
                         <x-delete-icon />
@@ -39,7 +41,7 @@
                         </form>
                     </x-modal>
                     @endauth
-                </li></a>
+                </li>
                 @endforeach
             </ul>
         </div>

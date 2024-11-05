@@ -11,9 +11,9 @@
             </div>
 
             <!-- Categories -->
-            <div>
+            <div class="mt-4">
                 <x-input-label for="category" :value="__('Categories')" />
-                <select name="categories[]" id="category" multiple>
+                <select name="categories[]" id="category" multiple class="mt-1">
                     @foreach($categories as $category)
                     <option value="{{ $category->id }}">{{ $category->name }}</option>
                     @endforeach
@@ -22,7 +22,7 @@
             </div>
 
             <!-- Image -->
-            <div>
+            <div class="mt-4">
                 <x-input-label for="image" :value="__('Image')" />
                 <x-text-input id="image" class="block mt-1 w-full" type="file" accept=".jpeg,.png,.jpg,.svg" name="image" placeholder="{{ __('Your article image') }}" autofocus />
                 <x-input-error :messages="$errors->get('image')" class="mt-2" />
