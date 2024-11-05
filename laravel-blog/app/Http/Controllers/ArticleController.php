@@ -6,7 +6,8 @@ use App\Models\Article;
 use App\Models\Category;
 
 use Illuminate\Http\Request;
-use App\Http\Requests\ArticleRequest;
+use App\Http\Requests\ArticleStoreRequest;
+use App\Http\Requests\ArticleUpdateRequest;
 use Illuminate\Auth\Events\Validated;
 
 use Illuminate\Support\Facades\Gate;
@@ -42,7 +43,7 @@ class ArticleController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(ArticleRequest $request)
+    public function store(ArticleStoreRequest $request)
     {
         Gate::authorize('create', Article::class);
 
@@ -89,7 +90,7 @@ class ArticleController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(ArticleRequest $request, Article $article)
+    public function update(ArticleUpdateRequest $request, Article $article)
     {
         Gate::authorize('update', $article);
 
