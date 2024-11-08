@@ -26,12 +26,4 @@ class ArticleFactory extends Factory
             'is_premium_content' => $this->faker->boolean(),
         ];
     }
-
-    public function withImage(string $image_path): Factory {
-        return $this->state(function (array $attributes) use ($image_path) {
-            return [
-                'image_path' => $image_path,
-            ];
-        });
-    }
 }

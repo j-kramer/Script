@@ -18,8 +18,10 @@ class ArticleSeeder extends Seeder
         $categories = Category::all();
         $categoryCount = Category::count();
 
-        Article::factory(10)->create();
-        Article::factory(10)->withImage('y.svg')->create();
+        Article::factory(20)->sequence(
+            ['image_path' => null],
+            ['image_path' => 'y.svg'],
+            )->create();
 
         Article::all()->each(function (Article $article) use (&$categories, $categoryCount) {
             $article->categories()->sync($categories->random(rand(0,$categoryCount)));
