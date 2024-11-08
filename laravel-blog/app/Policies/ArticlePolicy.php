@@ -19,9 +19,15 @@ class ArticlePolicy
     /**
      * Determine whether the user can view the model.
      */
-    public function view(?User $user, Article $article): bool
+    public function view(?User $user, Article $article): Response
     {
-        return true;
+        $is_premium_content = $article->is_premium_content;
+        if (!$is_premium_content) {
+            return Response::allow();
+        }
+        return isset($user) && ($user->has_premium || $article->user()->is($user))
+                ? Response::allow()
+                : Response::deny('Only registered users with premium can read this article.');
     }
 
     /**
