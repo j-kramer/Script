@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Models\Article;
 use App\Models\Category;
+use Illuminate\Contracts\Database\Eloquent\Builder;
 
 class HomeServer extends Controller
 {
@@ -14,12 +15,21 @@ class HomeServer extends Controller
      */
     public function __invoke(Request $request)
     {
-        $category = $request->query("category");
-        if (isset($category)) {
-            $articles =  Category::find($category)->articles()->latest()->paginate(10);
-        } else {
-            $articles =  Article::latest()->paginate(10);
-        }
+
+        $validated = $request->validate([
+            'category' => 'nullable|exists:categories,id',
+            'search' => 'nullable|string|max:255',
+        ]);
+
+        $articles = Article::query()
+                    ->when($validated['category'] ?? null, function(Builder $query, int $category) {
+                        $query->inCategory($category);
+                    })
+                    ->when($validated['search'] ?? null, function(builder $query, string $searchTerm) {
+                        $query->searchTitle($searchTerm);
+                    })
+                    ->latest()
+                    ->paginate(10)->withQueryString();
 
         //save the data from the query string so we can use the old() method in blade
         request()->flash();

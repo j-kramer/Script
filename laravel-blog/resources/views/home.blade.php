@@ -1,7 +1,13 @@
 <x-app-layout>
     <div class="max-w-2xl mx-auto p-0 sm:p-6 lg:p-8">
         <form method="GET">
-            <div class="flex justify-between items-center">
+            <!-- Searchbar -->
+            <div>
+                <x-text-input id="search" class="block mt-1 w-full" type="text" name="search" placeholder="Search title..." :value="old('search')" autofocus />
+                <x-input-error :messages="$errors->get('search')" class="mt-2" />
+            </div>
+
+            <div class="flex justify-between items-center mt-4">
                 <x-input-label for="category" :value="__('Category:')" />
                 <select name="category" id="category" onchange="this.form.submit();">
                     <option value="">All</option>
@@ -11,6 +17,12 @@
                     </option>
                     @endforeach
                 </select>
+
+            <div class="flex items-center justify-end mt-4">
+                <a href="{{ route('home') }}">{{ __('Clear') }}</a>
+                <x-primary-button class="ms-4">
+                    {{ __('Filter') }}
+                </x-primary-button>
             </div>
         </form>
         <x-article-list :$articles />

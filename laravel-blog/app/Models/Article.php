@@ -4,7 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Builder;
 
 class Article extends Model
 {
@@ -24,11 +26,21 @@ class Article extends Model
         'is_premium_content'
     ];
 
-    public function user() {
+    public function user(): BelongsTo {
         return $this->belongsTo(User::class);
     }
 
     public function categories(): BelongsToMany {
         return $this->belongsToMany(Category::class);
+    }
+
+    public function scopeSearchTitle(Builder $builder, string $query): void {
+        $builder->whereLike('title', '%' . $query . '%');
+    }
+
+    public function scopeInCategory(Builder $builder, int $category): void {
+        $builder->join('article_category', 'articles.id', '=', 'article_category.article_id')
+        ->where('category_id', $category)
+        ->select('articles.*');
     }
 }
