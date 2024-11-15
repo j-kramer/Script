@@ -26,4 +26,19 @@ class ArticleFactory extends Factory
             'is_premium_content' => $this->faker->boolean(),
         ];
     }
+
+    /**
+     * Indicate that the articles show be created past month.
+     */
+    public function lastMonth(): static
+    {
+        return $this->state(function (array $attributes) {
+            $datetime = $this->faker->dateTimeThisMonth();
+            return [
+                'created_at' => $datetime,
+                'updated_at' => $datetime,
+            ];
+        });
+    }
+
 }

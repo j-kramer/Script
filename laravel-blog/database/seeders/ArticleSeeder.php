@@ -18,7 +18,7 @@ class ArticleSeeder extends Seeder
         $categories = Category::all();
         $categoryCount = Category::count();
 
-        Article::factory(20)->sequence(
+        Article::factory(20)->lastMonth()->sequence(
             ['image_path' => null],
             ['image_path' => 'y.svg'],
             )->create();
