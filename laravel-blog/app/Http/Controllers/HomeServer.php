@@ -16,9 +16,14 @@ class HomeServer extends Controller
     public function __invoke(Request $request)
     {
 
+        $request->merge([
+            'onlyPremium' => $request->boolean('onlyPremium'),
+        ]);
+
         $validated = $request->validate([
             'category' => 'nullable|exists:categories,id',
             'search' => 'nullable|string|max:255',
+            'onlyPremium' => 'nullable|boolean',
         ]);
 
         $articles = Article::query()
@@ -27,6 +32,9 @@ class HomeServer extends Controller
                     })
                     ->when($validated['search'] ?? null, function(builder $query, string $searchTerm) {
                         $query->searchTitle($searchTerm);
+                    })
+                    ->when($validated['onlyPremium'], function(Builder $query, bool $onlyPremium) {
+                        $query->whereIsPremiumContent($onlyPremium);
                     })
                     ->latest()
                     ->paginate(10)->withQueryString();

@@ -17,6 +17,11 @@
                     </option>
                     @endforeach
                 </select>
+                <label for="premium" class="inline-flex items-center">
+                    <input type="checkbox" id="premium" name="onlyPremium" value="true" @checked(old('onlyPremium')) onchange="this.form.submit();"/>
+                    <span class="ms-2 text-sm text-gray-600">{{ __('Only premium content') }}</span>
+                </label>
+            </div>
 
             <div class="flex items-center justify-end mt-4">
                 <a href="{{ route('home') }}">{{ __('Clear') }}</a>
