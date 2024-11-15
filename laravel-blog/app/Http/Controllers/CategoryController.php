@@ -45,7 +45,7 @@ class CategoryController extends Controller
     public function show(Category $category)
     {
 
-        $articles = $category->articles()->with(['user:id,name', 'categories:id,name'])->latest()->paginate(10);
+        $articles = $category->articles()->latest()->paginate(10);
 
         return view('categories.show', [
             'category' => $category,

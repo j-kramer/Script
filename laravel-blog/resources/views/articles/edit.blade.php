@@ -35,8 +35,8 @@
             </div>
 
             <!-- Premium -->
-            <div class="block mt-4">
-                <label for="premium" class="inline-flex items-center">
+            <div class="mt-4">
+                <label for="premium" class="items-center">
                     <input type="checkbox" id="premium" name="is_premium_content" value="true" @checked(old('is_premium_content', $article)) />
                     <span class="ms-2 text-sm text-gray-600">{{ __('Is premium content') }}</span>
                 </label>

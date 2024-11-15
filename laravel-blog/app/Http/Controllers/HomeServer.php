@@ -23,7 +23,7 @@ class HomeServer extends Controller
         $validated = $request->validate([
             'category' => 'nullable|exists:categories,id',
             'search' => 'nullable|string|max:255',
-            'onlyPremium' => 'nullable|boolean',
+            'onlyPremium' => 'boolean',
         ]);
 
         $articles = Article::query()
