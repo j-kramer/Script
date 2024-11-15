@@ -14,17 +14,19 @@ class HomeServer extends Controller
      */
     public function __invoke(Request $request)
     {
-        $selectedCategoryID = $request->query("category");
-        if (isset($selectedCategoryID)) {
-            $articles =  Category::find($selectedCategoryID)->articles()->with(['user:id,name', 'categories:id,name'])->latest()->paginate(10);
+        $category = $request->query("category");
+        if (isset($category)) {
+            $articles =  Category::find($category)->articles()->latest()->paginate(10);
         } else {
-            $articles =  Article::with(['user:id,name', 'categories:id,name'])->latest()->paginate(10);
+            $articles =  Article::latest()->paginate(10);
         }
+
+        //save the data from the query string so we can use the old() method in blade
+        request()->flash();
 
         return view('home', [
             'articles' => $articles,
             'categories' => Category::all(),
-            'selectedCategoryID' => $selectedCategoryID,
         ]);
     }
 }

@@ -10,6 +10,13 @@ class Article extends Model
 {
     use HasFactory;
 
+    /**
+     * The relationships that should always be loaded.
+     *
+     * @var array
+     */
+    protected $with = ['user:id,name', 'categories:id,name'];
+
     protected $fillable = [
         'title',
         'content',

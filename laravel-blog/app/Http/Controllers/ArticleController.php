@@ -24,7 +24,7 @@ class ArticleController extends Controller
         Gate::authorize('viewAny', Article::class);
 
         return view('articles.index', [
-            'articles' => Article::with(['categories'])->where('user_id', Auth::id())->latest()->paginate(10),
+            'articles' => Article::where('user_id', Auth::id())->latest()->paginate(10),
         ]);
     }
 
@@ -82,7 +82,7 @@ class ArticleController extends Controller
         Gate::authorize('update', $article);
 
         return view('articles.edit', [
-            'article' => $article->load('categories'),
+            'article' => $article,
             'categories' => Category::all(),
         ]);
     }

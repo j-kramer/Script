@@ -6,7 +6,7 @@
                 <select name="category" id="category" onchange="this.form.submit();">
                     <option value="">All</option>
                     @foreach($categories as $category)
-                    <option value="{{ $category->id }}" {{ $selectedCategoryID == $category->id ? 'selected' : '' }}>
+                    <option value="{{ $category->id }}" @selected(old('category') == $category->id)>
                         {{ $category->name }}
                     </option>
                     @endforeach
