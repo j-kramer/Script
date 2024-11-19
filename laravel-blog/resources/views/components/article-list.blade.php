@@ -21,6 +21,9 @@
             @unless ($article->created_at->eq($article->updated_at))
             <small class="text-sm text-gray-600"> &middot; {{ __('edited') }}</small>
             @endunless
+            @if ($article->sponsored_untill?->isFuture())
+            <small class="text-sm text-yellow-600"> &middot; {{ __('sponsored') }}</small>
+            @endif
             @if ($article->is_premium_content)
             <small class="text-sm text-red-600"> &middot; {{ __('premium') }}</small>
             @endif

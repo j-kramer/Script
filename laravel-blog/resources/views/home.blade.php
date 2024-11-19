@@ -21,6 +21,10 @@
                     <input type="checkbox" id="premium" name="onlyPremium" value="true" @checked(old('onlyPremium')) onchange="this.form.submit();"/>
                     <span class="ms-2 text-sm text-gray-600">{{ __('Only premium content') }}</span>
                 </label>
+                <label for="sponsored" class="inline-flex items-center">
+                    <input type="checkbox" id="sponsored" name="ignoreSponsored" value="true" @checked(old('ignoreSponsored')) onchange="this.form.submit();"/>
+                    <span class="ms-2 text-sm text-gray-600">{{ __('Ignore sponsor status') }}</span>
+                </label>
             </div>
 
             <div class="flex items-center justify-end mt-4">

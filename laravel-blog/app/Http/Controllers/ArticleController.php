@@ -53,10 +53,21 @@ class ArticleController extends Controller
             $validated['image_path'] = $validated['image']->store('images');
         }
 
-        $article = $request->user()->articles()->create($validated);
+        /*
+         * use make() to get an unsaved instance of Article, so we can add the correct
+         * sponsored_untill date & time without an extra query
+         */
+        $article = $request->user()->articles()->make();
+        $article->fill($validated);
+        $article->sponsored_untill = now();
+        $article->save();
 
         if (isset($validated['categories'])) {
             $article->categories()->attach($validated['categories']);
+        }
+
+        if ($validated['is_sponsored_content']) {
+            return redirect()->route('sponsor.show', $article);
         }
 
         return redirect()->route('articles.index');
@@ -112,6 +123,10 @@ class ArticleController extends Controller
             $article->categories()->detach();
         }
 
+        if ($validated['is_sponsored_content']) {
+            return redirect()->route('sponsor.show', $article);
+        }
+
         return redirect()->route('articles.index');
     }
 
@@ -123,6 +138,31 @@ class ArticleController extends Controller
         Gate::authorize('delete', $article);
 
         $article->delete();
+
+        return redirect()->route('articles.index');
+    }
+
+    /**
+     * Show the form for sponsoring an article.
+     */
+    public function showSponsor(Article $article)
+    {
+        Gate::authorize('update', $article);
+
+        return view('articles.sponsor', [
+            'article' => $article,
+        ]);
+    }
+
+    /**
+     * Sponsor an article
+     */
+    public function updateSponsor(Article $article)
+    {
+        Gate::authorize('update', $article);
+
+        $article->sponsored_untill = now()->addMonth();
+        $article->save();
 
         return redirect()->route('articles.index');
     }

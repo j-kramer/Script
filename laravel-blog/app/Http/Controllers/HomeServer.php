@@ -18,12 +18,14 @@ class HomeServer extends Controller
 
         $request->merge([
             'onlyPremium' => $request->boolean('onlyPremium'),
+            'ignoreSponsored' => $request->boolean('ignoreSponsored'),
         ]);
 
         $validated = $request->validate([
             'category' => 'nullable|exists:categories,id',
             'search' => 'nullable|string|max:255',
             'onlyPremium' => 'boolean',
+            'ignoreSponsored' => 'boolean',
         ]);
 
         $articles = Article::query()
@@ -36,7 +38,9 @@ class HomeServer extends Controller
                     ->when($validated['onlyPremium'], function(Builder $query, bool $onlyPremium) {
                         $query->whereIsPremiumContent($onlyPremium);
                     })
-                    ->latest()
+                    ->when(!$validated['ignoreSponsored'], function(Builder $query, bool $ignoreSponsored) {
+                        $query->orderBySponsored();
+                    }, fn ($q) => $q->latest())
                     ->paginate(10)->withQueryString();
 
         //save the data from the query string so we can use the old() method in blade

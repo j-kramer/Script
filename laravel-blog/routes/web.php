@@ -14,6 +14,8 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::resource('articles', ArticleController::class)->middleware('auth')->except('show');
+Route::get('articles/{article}/sponsor', [ArticleController::class, 'showSponsor'])->name('sponsor.show');
+Route::post('articles/{article}/sponsor', [ArticleController::class, 'updateSponsor'])->name('sponsor.update');
 Route::get('articles/{article}', [ArticleController::class, 'show'])->name('articles.show');
 
 Route::get('categories', [CategoryController::class, 'index'])->name('categories.index');

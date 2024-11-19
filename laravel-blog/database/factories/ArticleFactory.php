@@ -18,27 +18,17 @@ class ArticleFactory extends Factory
      */
     public function definition(): array
     {
+        $datetime = $this->faker->dateTimeThisMonth();
+
         return [
             'user_id' => User::inRandomOrder()->first()->id,
             'title' => $this->faker->sentence,
             'content' => $this->faker->paragraphs(3, true),
             'image_path' => null,
             'is_premium_content' => $this->faker->boolean(),
+            'sponsored_untill' => $this->faker->optional(0.1, $datetime)->dateTimeBetween('now', '+1 month'),
+            'created_at' => $datetime,
+            'updated_at' => $datetime,
         ];
     }
-
-    /**
-     * Indicate that the articles show be created past month.
-     */
-    public function lastMonth(): static
-    {
-        return $this->state(function (array $attributes) {
-            $datetime = $this->faker->dateTimeThisMonth();
-            return [
-                'created_at' => $datetime,
-                'updated_at' => $datetime,
-            ];
-        });
-    }
-
 }

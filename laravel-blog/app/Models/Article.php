@@ -23,8 +23,20 @@ class Article extends Model
         'title',
         'content',
         'image_path',
-        'is_premium_content'
+        'is_premium_content',
     ];
+
+    /**
+     * Get the attributes that should be cast.
+     *
+     * @return array<string, string>
+     */
+    protected function casts(): array
+    {
+        return [
+            'sponsored_untill' => 'datetime',
+        ];
+    }
 
     public function user(): BelongsTo {
         return $this->belongsTo(User::class);
@@ -42,5 +54,9 @@ class Article extends Model
         $builder->join('article_category', 'articles.id', '=', 'article_category.article_id')
         ->where('category_id', $category)
         ->select('articles.*');
+    }
+
+    public function scopeOrderBySponsored(Builder $builder): void {
+        $builder->orderBy('sponsored_untill','desc');
     }
 }

@@ -43,6 +43,17 @@
                 <x-input-error :messages="$errors->get('is_premium_content')" class="mt-2" />
             </div>
 
+            <!-- Sponsored -->
+            <div>
+                <label for="sponsored" class="items-center">
+                    <input type="checkbox" id="sponsored" name="is_sponsored_content" value="true" />
+                    <span class="ms-2 text-sm text-gray-600">{{ __('Sponsor this content') }}</span>
+                    @if ($article->sponsored_untill?->isFuture())
+                    <small class="text-sm text-yellow-600"> &middot; {{ __(' this article is already sponsored') }}</small>
+                    @endif
+                </label>
+            </div>
+
             <!-- Content -->
             <div class="mt-4">
                 <x-input-label for="content" :value="__('Content')" />

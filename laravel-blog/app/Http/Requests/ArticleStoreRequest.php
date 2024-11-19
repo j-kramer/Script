@@ -21,6 +21,7 @@ class ArticleStoreRequest extends FormRequest
     {
         $this->merge([
             'is_premium_content' => $this->boolean('is_premium_content'),
+            'is_sponsored_content' => $this->boolean('is_sponsored_content'),
         ]);
     }
 
@@ -37,6 +38,7 @@ class ArticleStoreRequest extends FormRequest
             'image' => 'nullable|image|mimes:jpeg,png,jpg,svg|max:2048|dimensions:min_width=320',
             'categories' => 'nullable|exists:categories,id',
             'is_premium_content' => 'boolean',
+            'is_sponsored_content' => 'boolean',
         ];
     }
 }
