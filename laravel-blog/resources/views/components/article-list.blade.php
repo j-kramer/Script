@@ -1,4 +1,4 @@
-@props(['articles', 'showUser' => true])
+@props(['articles'])
 
 <div class="mt-6 bg-white shadow-sm rounded-lg divide-y">
     @foreach ($articles as $article)
@@ -12,27 +12,7 @@
             <a href="{{ route('articles.show', $article) }}">
                 <h1 class="text-lg text-gray-900">{{ $article->title }}</h1>
             </a>
-            @if ($showUser)
-            @isset($article->user->name)
-            <small>By {{ $article->user->name }}</small>
-            @endisset
-            @endif
-            <small class="ml-2 text-sm text-gray-600">{{ $article->created_at->format('j M Y, g:i a') }}</small>
-            @unless ($article->created_at->eq($article->updated_at))
-            <small class="text-sm text-gray-600"> &middot; {{ __('edited') }}</small>
-            @endunless
-            @if ($article->sponsored_untill?->isFuture())
-            <small class="text-sm text-yellow-600"> &middot; {{ __('sponsored') }}</small>
-            @endif
-            @if ($article->is_premium_content)
-            <small class="text-sm text-red-600"> &middot; {{ __('premium') }}</small>
-            @endif
-            <br />
-            <small>
-                Categories: @foreach ($article->categories as $category)
-                <a href="{{ route('categories.show', $category) }}">{{ $category->name }}</a>
-                @endforeach
-            </small>
+            @include('articles.partials.article-info')
         </div>
         @canany(['update', 'delete'], $article)
         <div class="inline-flex items-center">

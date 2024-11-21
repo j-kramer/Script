@@ -3,6 +3,6 @@
         <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('articles.create') }}">
             <x-primary-button>{{ __('Create an Article') }}</x-primary-button>
         </a>
-        <x-article-list :$articles :showUser="false" />
+        <x-article-list :$articles />
     </div>
 </x-app-layout>
