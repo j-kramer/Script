@@ -34,6 +34,7 @@ class Article extends Model
     protected function casts(): array
     {
         return [
+            'is_premium_content' => 'boolean',
             'sponsored_untill' => 'datetime',
         ];
     }
