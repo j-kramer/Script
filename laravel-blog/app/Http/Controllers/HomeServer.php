@@ -41,7 +41,9 @@ class HomeServer extends Controller
                     ->when(!$validated['ignoreSponsored'], function(Builder $query, bool $ignoreSponsored) {
                         $query->orderBySponsored();
                     }, fn ($q) => $q->latest())
-                    ->paginate(10)->withQueryString();
+                    ->withCount('comments')
+                    ->paginate(10)
+                    ->withQueryString();
 
         //save the data from the query string so we can use the old() method in blade
         request()->flash();

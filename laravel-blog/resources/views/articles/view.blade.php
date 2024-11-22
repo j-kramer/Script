@@ -18,4 +18,14 @@
             </div>
         </div>
     </div>
+
+    <div class="max-w-2xl mx-auto p-4 sm:p-6 lg:p-8">
+        @auth
+        <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('articles.comments.create', $article) }}">
+            <x-primary-button>{{ __('Comment') }}</x-primary-button>
+        </a>
+        @endauth
+
+        @include('comments.partials.comment-list')
+    </div>
 </x-app-layout>

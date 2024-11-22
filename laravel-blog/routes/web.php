@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\HomeServer;
@@ -17,6 +18,8 @@ Route::resource('articles', ArticleController::class)->middleware('auth')->excep
 Route::get('articles/{article}/sponsor', [ArticleController::class, 'showSponsor'])->name('sponsor.show');
 Route::post('articles/{article}/sponsor', [ArticleController::class, 'updateSponsor'])->name('sponsor.update');
 Route::get('articles/{article}', [ArticleController::class, 'show'])->name('articles.show');
+Route::resource('articles.comments', CommentController::class)->middleware('auth')->shallow();
+
 
 Route::get('categories', [CategoryController::class, 'index'])->name('categories.index');
 Route::resource('categories', CategoryController::class)->middleware('auth')->only(['store', 'destroy']);

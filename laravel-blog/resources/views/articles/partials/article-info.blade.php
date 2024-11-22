@@ -18,4 +18,10 @@
     <a href="{{ route('categories.show', $category) }}">{{ $category->name }}</a>
     @endforeach
 </small>
+<br />
 @endif
+@isset($comments)
+<small class="text-sm text-gray-600"> {{ $comments->count() }} Comments</small>
+@else
+<small class="text-sm text-gray-600"> {{ $article->comments_count }} Comments</small>
+@endisset

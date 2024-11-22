@@ -24,7 +24,9 @@ class ArticleController extends Controller
         Gate::authorize('viewAny', Article::class);
 
         return view('articles.index', [
-            'articles' => Article::where('user_id', Auth::id())->latest()->paginate(10),
+            'articles' => Article::where('user_id', Auth::id())
+                                ->withCount('comments')
+                                ->latest()->paginate(10),
         ]);
     }
 
@@ -82,6 +84,7 @@ class ArticleController extends Controller
 
         return view('articles.view', [
             'article' => $article,
+            'comments' => $article->comments,
         ]);
     }
 
