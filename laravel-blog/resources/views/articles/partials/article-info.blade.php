@@ -12,8 +12,10 @@
 <small class="text-sm text-red-600"> &middot; {{ __('premium') }}</small>
 @endif
 <br />
+@if ($article->categories->isNotEmpty())
 <small>
     Categories: @foreach ($article->categories as $category)
     <a href="{{ route('categories.show', $category) }}">{{ $category->name }}</a>
     @endforeach
 </small>
+@endif
