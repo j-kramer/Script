@@ -18,7 +18,7 @@ Route::resource('articles', ArticleController::class)->middleware('auth')->excep
 Route::get('articles/{article}/sponsor', [ArticleController::class, 'showSponsor'])->name('sponsor.show');
 Route::post('articles/{article}/sponsor', [ArticleController::class, 'updateSponsor'])->name('sponsor.update');
 Route::get('articles/{article}', [ArticleController::class, 'show'])->name('articles.show');
-Route::resource('articles.comments', CommentController::class)->middleware('auth')->shallow();
+Route::apiResource('articles.comments', CommentController::class)->middleware('auth')->shallow();
 
 
 Route::get('categories', [CategoryController::class, 'index'])->name('categories.index');

@@ -20,16 +20,6 @@ class CommentController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     */
-    public function create(Article $article)
-    {
-        Gate::authorize('create', Comment::class);
-
-        return view('comments.create', compact('article'));
-    }
-
-    /**
      * Store a newly created resource in storage.
      */
     public function store(StoreCommentRequest $request, Article $article)
@@ -52,16 +42,6 @@ class CommentController extends Controller
     public function show(Comment $comment)
     {
         return redirect()->route('articles.show', $comment->article)->withFragment($comment->id);
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Comment $comment)
-    {
-        Gate::authorize('update', $comment);
-
-        return view('comments.edit', compact('comment'));
     }
 
     /**
