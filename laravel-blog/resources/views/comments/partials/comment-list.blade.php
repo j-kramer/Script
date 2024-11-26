@@ -24,7 +24,7 @@
                 @csrf
                 @method('patch')
 
-                <input type="hidden" value="{{$comment->id}}"" name=" editId" />
+                <input type="hidden" value="{{$comment->id}}" name="editId" />
 
                 <!-- Comment -->
                 <div class="mt-4">
