@@ -4,9 +4,9 @@
         @include('categories.partials.create-category-form')
         @endauth
 
-        <div class="mt-6 bg-white shadow-sm rounded-lg divide-y">
+        <div class="mt-6 bg-white shadow-sm rounded-lg divide-y p-2">
             <h1>All Categories:</h1>
-            <ul class="list-disc">
+            <ul class="list-disc pl-3">
                 @foreach ($categories as $category)
                 <li><a href="{{ route('categories.show', $category) }}">{{ $category->name }}</a>
                     @auth

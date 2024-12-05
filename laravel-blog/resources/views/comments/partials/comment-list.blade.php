@@ -1,4 +1,4 @@
-<section class="mt-6 bg-white shadow-sm rounded-lg divide-y" id="comments">
+<section class="mt-6 bg-white shadow-sm rounded-lg divide-y overflow-y-auto max-h-screen" id="comments">
     @foreach ($comments as $comment)
     <article x-data="{ open: @bool($errors->hasBag('update') && old('editId') == $comment->id) }" class="p-3 flex flex-row space-x-2" id="{{$comment->id}}">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-600 -scale-x-100" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
