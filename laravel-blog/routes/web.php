@@ -5,6 +5,7 @@ use App\Http\Controllers\CommentController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\HomeServer;
+use App\Http\Controllers\MessageController;
 use App\Http\Controllers\PremiumController;
 use Illuminate\Support\Facades\Route;
 
@@ -34,6 +35,12 @@ Route::middleware('auth')->group(function () {
 Route::middleware('auth')->group(function() {
     Route::get('premium', [PremiumController::class,'edit'])->name('premium.edit');
     Route::patch('premium', [PremiumController::class, 'update'])->name('premium.update');
+});
+
+Route::middleware('auth')->group(function() {
+    Route::get('conversations', [MessageController::class, 'index'])->name('conversations');
+    Route::get('conversations/{user}', [MessageController::class, 'show'])->name('conversations.show');
+    Route::post('conversations/{user}', [MessageController::class, 'store'])->name('conversations.store');
 });
 
 require __DIR__.'/auth.php';

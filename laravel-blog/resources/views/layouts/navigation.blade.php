@@ -44,6 +44,13 @@
                 <x-nav-link :href="route('premium.edit')" :active="request()->routeIs('premium.edit')">
                     {{ __('Get Premium') }}
                 </x-nav-link>
+                <x-nav-link class="mx-3" :href="route('conversations')" :active="request()->routeIs('coversations')">
+                    @if (Auth::user()->unread_messages_count > 0)
+                    Unread Messages: {{ Auth::user()->unread_messages_count }}
+                    @else
+                    Private Messages
+                    @endif
+                </x-nav-link>
                 <!-- Settings Dropdown -->
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">

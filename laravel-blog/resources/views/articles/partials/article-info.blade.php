@@ -1,5 +1,11 @@
 @if($article->user->id != Auth::id())
+@auth
+<a href="{{ route('conversations.show', $article->user) }}">
+    <small class="mr-2">By {{ $article->user->name }}</small>
+</a>
+@else
 <small class="mr-2">By {{ $article->user->name }}</small>
+@endauth
 @endif
 <small class="text-sm text-gray-600">{{ $article->created_at->format('j M Y, g:i a') }}</small>
 @unless ($article->created_at->eq($article->updated_at))

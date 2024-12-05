@@ -6,7 +6,13 @@
         </svg>
         <div class="flex-1">
             <div>
+                @auth
+                <a href="{{ route('conversations.show', $comment->user) }}">
+                    <span class="text-gray-800">{{ $comment->user->name }}</span>
+                </a>
+                @else
                 <span class="text-gray-800">{{ $comment->user->name }}</span>
+                @endauth
                 <small class="ml-2 text-sm text-gray-600">{{ $comment->created_at->format('j M Y, g:i a') }}</small>
                 @unless ($comment->created_at->eq($comment->updated_at))
                 <small class="text-sm text-gray-600"> &middot; {{ __('edited') }}</small>
