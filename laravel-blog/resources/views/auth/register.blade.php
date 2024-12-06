@@ -21,9 +21,9 @@
             <x-input-label for="password" :value="__('Password')" />
 
             <x-text-input id="password" class="block mt-1 w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="new-password" />
+                type="password"
+                name="password"
+                required autocomplete="new-password" />
 
             <x-input-error :messages="$errors->get('password')" class="mt-2" />
         </div>
@@ -33,10 +33,19 @@
             <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
 
             <x-text-input id="password_confirmation" class="block mt-1 w-full"
-                            type="password"
-                            name="password_confirmation" required autocomplete="new-password" />
+                type="password"
+                name="password_confirmation" required autocomplete="new-password" />
 
             <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
+        </div>
+
+        <!-- Enable Notifications -->
+        <div class="block mt-4">
+            <label for="enable_notifications" class="inline-flex items-center">
+                <input id="enable_notifications" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" name="enable_notifications" value="true" @checked(old('enable_notifications'))>
+                <span class="ms-2 text-sm text-gray-600">{{ __('Enable notifications') }}</span>
+            </label>
+            <x-input-error :messages="$errors->get('enable_notifications')" class="mt-2" />
         </div>
 
         <div class="flex items-center justify-end mt-4">

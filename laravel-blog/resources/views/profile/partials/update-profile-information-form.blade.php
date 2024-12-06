@@ -47,6 +47,14 @@
             @endif
         </div>
 
+        <div>
+            <label for="enable_notifications" class="inline-flex items-center">
+                <input id="enable_notifications" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" name="enable_notifications" value="true" @checked(old('enable_notifications', $user->enable_notifications))>
+                <span class="ms-2 text-sm text-gray-600">{{ __('Enable notifications') }}</span>
+            </label>
+            <x-input-error class="mt-2" :messages="$errors->get('enable_notifications')" />
+        </div>
+
         <div class="flex items-center gap-4">
             <x-primary-button>{{ __('Save') }}</x-primary-button>
 

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Events\MessageCreated;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Model;
@@ -16,6 +17,10 @@ class Message extends Model
 
     protected $fillable = [
         'message'
+    ];
+
+    protected $dispatchesEvents = [
+        'created' => MessageCreated::class,
     ];
 
     /**

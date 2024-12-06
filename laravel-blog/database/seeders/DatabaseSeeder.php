@@ -16,6 +16,7 @@ class DatabaseSeeder extends Seeder
         User::factory(2)->sequence([
             'name' => 'Test User',
             'email' => 'test@example.com',
+            'enable_notifications' => true,
         ], [
             'name' => 'Test User 2',
             'email' => 'test2@example.com',
