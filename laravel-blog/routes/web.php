@@ -11,10 +11,6 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', HomeServer::class)->name('home');
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
-
 Route::resource('articles', ArticleController::class)->middleware('auth')->except('show');
 Route::get('articles/{article}/sponsor', [ArticleController::class, 'showSponsor'])->name('sponsor.show');
 Route::post('articles/{article}/sponsor', [ArticleController::class, 'updateSponsor'])->name('sponsor.update');
