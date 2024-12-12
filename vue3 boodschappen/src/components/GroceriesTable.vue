@@ -5,7 +5,7 @@ const products = defineModel();
 const totalPrice = computed(() => {
     let total = 0;
     for (let product of products.value) {
-        let number = product.ammount ?? 0;
+        let number = product.amount ?? 0;
         // ignore the product on negative quantities
         if (number < 0) {
             continue;
@@ -32,9 +32,9 @@ const totalPrice = computed(() => {
                 <td class="productName">{{ product.name }}</td>
                 <td>{{ product.price.toFixed(2) }}</td>
                 <td>
-                    <input v-model.number="product.ammount" type="number" value="0" min="0" />
+                    <input v-model.number="product.amount" type="number" value="0" min="0" />
                 </td>
-                <td>{{ (product.price * product.ammount).toFixed(2) }}</td>
+                <td>{{ (product.price * product.amount).toFixed(2) }}</td>
             </tr>
         </tbody>
         <tfoot>

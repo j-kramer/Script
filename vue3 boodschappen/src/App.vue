@@ -6,22 +6,22 @@ const boodschappenlijst = reactive([
     {
         name: 'Brood',
         price: 1.0,
-        ammount: 0,
+        amount: 0,
     },
     {
         name: 'Broccoli',
         price: 0.99,
-        ammount: 0,
+        amount: 0,
     },
     {
         name: 'Krentebollen',
         price: 1.2,
-        ammount: 0,
+        amount: 0,
     },
     {
         name: 'Noten',
         price: 2.99,
-        ammount: 0,
+        amount: 0,
     },
 ]);
 </script>
