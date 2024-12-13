@@ -1,33 +1,20 @@
 <script setup>
-import {reactive} from 'vue';
-import GroceriesTable from './components/GroceriesTable.vue';
-
-const boodschappenlijst = reactive([
-    {
-        name: 'Brood',
-        price: 1.0,
-        amount: 0,
-    },
-    {
-        name: 'Broccoli',
-        price: 0.99,
-        amount: 0,
-    },
-    {
-        name: 'Krentebollen',
-        price: 1.2,
-        amount: 0,
-    },
-    {
-        name: 'Noten',
-        price: 2.99,
-        amount: 0,
-    },
-]);
+import {RouterLink, RouterView} from 'vue-router';
 </script>
 
 <template>
-    <GroceriesTable v-model="boodschappenlijst" />
+    <h1>Grocery List</h1>
+    <nav>
+        <RouterLink to="/">Go to Home</RouterLink>
+        <RouterLink to="/create">Create a grocery list item</RouterLink>
+    </nav>
+    <main>
+        <RouterView />
+    </main>
 </template>
 
-<style scoped></style>
+<style lang="css" scoped>
+nav > a {
+    padding-right: 1rem;
+}
+</style>
