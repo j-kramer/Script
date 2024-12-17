@@ -57,10 +57,15 @@ export const addInventoryItem = (item) => {
   currentID++
   inventory.value.push(item)
 }
+
+export const updateAllInventoryAmounts = (newAmounts) => {
+  inventory.value.map((item, index) => (item.actualAmount = newAmounts[index]))
+}
 export const updateInventoryItem = (id, item) => {
   let oldItem = inventory.value.find((item) => item.id == id)
   Object.assign(oldItem, item)
 }
+
 export const removeInventoryItem = (id) => {
   inventory.value = inventory.value.filter((item) => item.id != id)
 }

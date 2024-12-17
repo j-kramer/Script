@@ -1,5 +1,9 @@
 <script setup>
+import { updateAllInventoryAmounts } from '@/store/inventory'
+
 const props = defineProps(['inventory'])
+
+const newAmounts = Array.from(props.inventory, (item) => item.actualAmount)
 </script>
 
 <template>
@@ -7,16 +11,49 @@ const props = defineProps(['inventory'])
     <thead>
       <tr>
         <th>Name</th>
-        <th>Available</th>
         <th>Minimum</th>
+        <th>Available</th>
       </tr>
     </thead>
     <tbody>
       <tr v-for="(item, index) in inventory" :key="index">
-        <td>{{ item.name }}</td>
-        <td>{{ item.actualAmount }}</td>
+        <td class="left">{{ item.name }}</td>
         <td>{{ item.minimumAmount }}</td>
+        <td>
+          <input v-model.number="newAmounts[index]" type="number" value="0" min="0" required />
+        </td>
       </tr>
     </tbody>
   </table>
+  <div>
+    <button @click="updateAllInventoryAmounts(newAmounts)">Store available amounts</button>
+  </div>
 </template>
+
+<style scoped>
+table {
+  text-align: center;
+}
+
+.left {
+  text-align: left;
+}
+
+input {
+  text-align: right;
+}
+
+th {
+  border-bottom: 2px solid;
+}
+
+tr:nth-child(even) {
+  background-color: #efefef;
+}
+
+div {
+  display: flex;
+  flex-direction: row-reverse;
+  padding-top: 5px;
+}
+</style>
