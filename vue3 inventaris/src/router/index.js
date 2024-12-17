@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Overview from '@/views/Overview.vue'
 import Add from '@/views/Add.vue'
+import Edit from '@/views/Edit.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -14,6 +15,11 @@ const router = createRouter({
       path: '/add',
       name: 'addItem',
       component: Add,
+    },
+    {
+      path: '/edit/:id',
+      name: 'editItem',
+      component: Edit,
     },
   ],
 })

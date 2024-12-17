@@ -1,5 +1,6 @@
 <script setup>
 import { updateAllInventoryAmounts } from '@/store/inventory'
+import IconEdit from '@/components/icons/IconEdit.vue'
 
 const props = defineProps(['inventory'])
 
@@ -21,6 +22,9 @@ const newAmounts = Array.from(props.inventory, (item) => item.actualAmount)
         <td>{{ item.minimumAmount }}</td>
         <td>
           <input v-model.number="newAmounts[index]" type="number" value="0" min="0" required />
+        </td>
+        <td>
+          <RouterLink :to="{ name: 'editItem', params: { id: item.id } }"><IconEdit /></RouterLink>
         </td>
       </tr>
     </tbody>
