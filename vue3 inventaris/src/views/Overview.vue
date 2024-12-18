@@ -1,8 +1,8 @@
 <script setup>
-import InventoryTable from '../components/InventoryTable.vue';
+import InventoryTable from '../components/InventoryTable.vue'
 import { getInventory } from '../store/inventory'
 
-const inventory = getInventory;
+const inventory = getInventory
 </script>
 
 <template>
