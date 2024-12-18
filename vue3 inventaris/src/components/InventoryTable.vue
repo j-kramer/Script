@@ -1,6 +1,7 @@
 <script setup>
-import { updateAllInventoryAmounts } from '@/store/inventory'
+import { removeInventoryItem, updateAllInventoryAmounts } from '@/store/inventory'
 import IconEdit from '@/components/icons/IconEdit.vue'
+import IconDelete from './icons/IconDelete.vue'
 
 const props = defineProps(['inventory'])
 
@@ -25,6 +26,7 @@ const newAmounts = Array.from(props.inventory, (item) => item.actualAmount)
         </td>
         <td>
           <RouterLink :to="{ name: 'editItem', params: { id: item.id } }"><IconEdit /></RouterLink>
+          <button @click="removeInventoryItem(item.id)"><IconDelete /></button>
         </td>
       </tr>
     </tbody>
