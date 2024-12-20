@@ -1,13 +1,11 @@
-import { createRouter, createWebHistory } from 'vue-router'
-import bookRouter from './domains/books/router'
+import { createRouter, createWebHistory } from "vue-router";
+import bookRoutes from "./domains/books/routes";
 
-const routes = [
-    ...bookRouter,
-]
+const routes = [...bookRoutes];
 
 const router = createRouter({
     history: createWebHistory(),
     routes,
-})
+});
 
-export default router
+export default router;
