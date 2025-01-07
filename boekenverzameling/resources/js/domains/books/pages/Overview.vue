@@ -2,7 +2,7 @@
 import BookList from "../components/BookList.vue";
 import { getAllBooks } from "../store";
 
-const books = getAllBooks();
+const books = getAllBooks;
 </script>
 
 <template>

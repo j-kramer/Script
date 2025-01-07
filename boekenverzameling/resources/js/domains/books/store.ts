@@ -1,18 +1,15 @@
-import { ref } from "vue";
+import { computed, ref } from "vue";
 import axios from "axios";
 
 // Book-state
-const books = ref([]);
+const books = ref<Book[]>([]);
 
 // De functie die de aanvraag met Axios naar de backend stuurt
 const fetchBooks = async () => {
-    const {
-        data: { data: data },
-    } = await axios.get("api/books");
+    const { data } = await axios.get("api/books");
     if (!data) return;
-    console.log(data);
     books.value = data;
 };
 fetchBooks();
 
-export const getAllBooks = () => books.value;
+export const getAllBooks = computed(() => books.value);
