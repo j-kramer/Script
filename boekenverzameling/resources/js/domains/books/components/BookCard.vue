@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type Book from "./types.ts";
+import type { Book } from "../types";
 
 const props = defineProps<{
     book: Book;

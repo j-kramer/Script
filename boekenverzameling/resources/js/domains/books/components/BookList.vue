@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import BookCard from "./BookCard.vue";
+import type { Book } from "../types";
+
 const props = defineProps<{
     books: Book[];
 }>();

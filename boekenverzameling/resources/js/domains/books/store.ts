@@ -1,5 +1,6 @@
 import { computed, ref } from "vue";
 import axios from "axios";
+import type { Book } from "./types";
 
 // Book-state
 const books = ref<Book[]>([]);
