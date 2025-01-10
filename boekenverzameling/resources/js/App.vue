@@ -1,9 +1,18 @@
 <template>
     <h1>Boekverzameling</h1>
     <nav>
-      <RouterLink to="/">Boeken</RouterLink>
+        <RouterLink to="/">Boeken</RouterLink>
     </nav>
     <main>
-      <RouterView />
+        <RouterView />
     </main>
-  </template>
+</template>
+
+<style>
+#app {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+</style>

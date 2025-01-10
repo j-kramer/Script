@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import BookCard from "./BookCard.vue";
 const props = defineProps<{
     books: Book[];
 }>();
@@ -7,17 +8,7 @@ const props = defineProps<{
 <template>
     <ul>
         <li v-for="(book, index) in books" :key="index">
-            <div>
-                <img :src="'/' + book.cover_path" alt="book cover">
-            </div>
-            {{ book.title }}
+            <BookCard :book="book" />
         </li>
     </ul>
 </template>
-
-<style lang="css" scoped>
-img {
-    width: 5rem;
-    height: 5rem;
-}
-</style>
