@@ -5,11 +5,10 @@ import axios from "axios";
 const books = ref<Book[]>([]);
 
 // De functie die de aanvraag met Axios naar de backend stuurt
-const fetchBooks = async () => {
+export const fetchBooks = async () => {
     const { data } = await axios.get("api/books");
     if (!data) return;
     books.value = data;
 };
-fetchBooks();
 
 export const getAllBooks = computed(() => books.value);
