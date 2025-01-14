@@ -1,7 +1,8 @@
 <template>
     <h1>Boekverzameling</h1>
     <nav>
-        <RouterLink to="/">Boeken</RouterLink>
+        <RouterLink class="navLink" to="/">Boekenlijst</RouterLink>
+        <RouterLink class="navLink" to="/create">Boek toevoegen</RouterLink>
     </nav>
     <main>
         <RouterView />
@@ -14,5 +15,9 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+
+.navLink {
+    padding-right: 1em;
 }
 </style>

@@ -26,7 +26,7 @@ class BookController extends Controller
     public function store(StoreBookRequest $request)
     {
         $validated = $request->validated();
-        $validated['cover_path'] = $validated['cover']->store('images');
+        $validated['cover_path'] = $validated['cover']->store('images', 'public');
         $book = Book::Create($validated);
         return (new BookResource($book))->response()->setStatusCode(201);
     }
