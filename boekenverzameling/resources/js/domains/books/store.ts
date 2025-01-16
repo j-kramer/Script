@@ -1,6 +1,11 @@
 import { computed, ref } from "vue";
 import axios from "axios";
-import type { Book, NewBook} from "./types";
+import type { Book, NewBook } from "./types";
+
+// defineer een interface voor het spoofen methods in formdata voor laravel
+interface SpoofMethod {
+    _method: "PUT" | "PATCH" | "DELETE";
+}
 
 // Book-state
 const books = ref<Book[]>([]);
@@ -22,4 +27,16 @@ export const addBook = async (book: NewBook) => {
     books.value.push(data);
 };
 
+export const updateBookByID = async (id: string, book: NewBook) => {
+    const tmp: NewBook & SpoofMethod = { _method: "PATCH", ...book };
+    const { data } = await axios.postForm<Book>(`/api/books/${id}`, tmp);
+    if (!data) return;
+    const index = books.value.findIndex((book) => book.id == id);
+    if (index >= 0) {
+        books.value.splice(index, 1, data);
+    }
+};
+
 export const getAllBooks = computed(() => books.value);
+export const getBookByID = (id: string) =>
+    computed(() => books.value.find((book) => book.id == id));

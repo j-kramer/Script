@@ -23,7 +23,7 @@ class UpdateBookRequest extends FormRequest
     {
         return [
             'title' => 'required|string|max:255',
-            'cover' => 'nullable|image|mimes:jpeg,png,jpg,svg|max:2048|dimensions:min_width=320',
+            'cover' => 'sometimes|required|image|mimes:jpeg,png,jpg,svg|max:2048|dimensions:min_width=320',
         ];
     }
 }

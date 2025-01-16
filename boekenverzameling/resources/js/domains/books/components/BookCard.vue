@@ -1,9 +1,13 @@
 <script setup lang="ts">
 import type { Book } from "../types";
+import { useRouter } from "vue-router";
+import IconEdit from "../../../icons/IconEdit.vue";
 
 const props = defineProps<{
     book: Book;
 }>();
+
+const router = useRouter();
 </script>
 
 <template>
@@ -12,6 +16,9 @@ const props = defineProps<{
             <img :src="'/' + book.cover_path" alt="book cover" />
         </div>
         {{ book.title }}
+          <button @click="router.push({ name: 'editBook', params: { id: book.id } })">
+            <IconEdit />
+          </button>
     </article>
 </template>
 

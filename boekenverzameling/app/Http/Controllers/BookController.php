@@ -45,8 +45,10 @@ class BookController extends Controller
     public function update(UpdateBookRequest $request, Book $book)
     {
         $validated = $request->validated();
-        Storage::delete($book->cover_path);
-        $validated['cover_path'] = $validated['cover']->store('images');
+        if ($request->hasFile('cover')) {
+            Storage::disk('public')->delete($book->cover_path);
+            $validated['cover_path'] = $validated['cover']->store('images', 'public');
+        }
         $book->update($validated);
         return new BookResource($book);
     }
