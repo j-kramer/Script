@@ -23,6 +23,7 @@ class StoreBookRequest extends FormRequest
     {
         return [
             'title' => 'required|string|max:255',
+            'author_id' => 'required|exists:authors,id',
             'cover' => 'required|image|mimes:jpeg,png,jpg,svg|max:2048|dimensions:min_width=320',
         ];
     }

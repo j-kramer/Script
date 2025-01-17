@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { useRouter } from "vue-router";
 import type { Book, NewBook } from "../types";
+import { getAllAuthors } from "../../authors/store";
 
 const props = defineProps<{
     book?: Book;
@@ -15,6 +16,7 @@ if (props.book) {
 } else {
     newBook = {
         title: "",
+        author_id: NaN,
     };
 }
 
@@ -36,7 +38,19 @@ function handleFileChange(event: Event) {
             />
         </div>
         <div class="flexline">
-            <label for="cover">cover:</label>
+            <label for="author">Author:</label>
+            <select required v-model="newBook.author_id">
+                <option
+                    v-for="(author, index) in getAllAuthors"
+                    :key="index"
+                    :value="author.id"
+                >
+                    {{ author.name }}
+                </option>
+            </select>
+        </div>
+        <div class="flexline">
+            <label for="cover">Cover:</label>
             <input
                 @change="handleFileChange($event)"
                 type="file"
