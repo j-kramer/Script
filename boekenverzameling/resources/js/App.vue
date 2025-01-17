@@ -3,6 +3,10 @@
     <nav>
         <RouterLink class="navLink" to="/">Boekenlijst</RouterLink>
         <RouterLink class="navLink" to="/create">Boek toevoegen</RouterLink>
+        <RouterLink class="navLink" to="/authors">Auteurlijst</RouterLink>
+        <RouterLink class="navLink" to="/authors/create"
+            >Auteur toevoegen</RouterLink
+        >
     </nav>
     <main>
         <RouterView />
