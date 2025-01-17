@@ -12,17 +12,13 @@ const books = ref<Book[]>([]);
 
 // De functie die de aanvraag met Axios naar de backend stuurt
 export const fetchBooks = async () => {
-    const { data } = await axios.get<Book[]>("api/books");
+    const { data } = await axios.get<Book[]>("/api/books");
     if (!data) return;
     books.value = data;
 };
 
 export const addBook = async (book: NewBook) => {
-    const { data } = await axios.post<Book>("api/books", book, {
-        headers: {
-            "Content-Type": "multipart/form-data",
-        },
-    });
+    const { data } = await axios.postForm<Book>("/api/books", book);
     if (!data) return;
     books.value.push(data);
 };

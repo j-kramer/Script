@@ -7,7 +7,13 @@ import { NewBook } from "../types";
 const router = useRouter();
 const route = useRoute();
 
-const id: string = route.params['id'];
+let id: string;
+if (typeof route.params.id == "string") {
+    id = route.params.id;
+} else {
+    id = route.params.id[0];
+}
+
 const book = getBookByID(id);
 
 function submit(newBook: NewBook) {
