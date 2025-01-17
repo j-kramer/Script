@@ -37,6 +37,12 @@ export const updateBookByID = async (id: string, book: NewBook) => {
     }
 };
 
+export const removeBook = async (id: string) => {
+    const { status } = await axios.delete(`/api/books/${id}`);
+    if (status != 204) return;
+    books.value = books.value.filter((book) => book.id != id);
+};
+
 export const getAllBooks = computed(() => books.value);
 export const getBookByID = (id: string) =>
     computed(() => books.value.find((book) => book.id == id));

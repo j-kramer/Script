@@ -8,9 +8,10 @@ const props = defineProps<{
 </script>
 
 <template>
-    <ul>
+    <ul v-if="books.length">
         <li v-for="(book, index) in books" :key="index">
             <BookCard :book="book" />
         </li>
     </ul>
+    <p v-else>Er zitten geen boeken in de verzameling</p>
 </template>

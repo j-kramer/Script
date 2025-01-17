@@ -58,6 +58,7 @@ class BookController extends Controller
      */
     public function destroy(Book $book)
     {
+        Storage::disk('public')->delete($book->cover_path);
         $book->delete();
         return response()->json(null, 204);
     }
