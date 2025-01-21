@@ -23,7 +23,7 @@ export const addAuthor = async (author: NewAuthor) => {
     authors.value.push(data);
 };
 
-export const updateAuthorByID = async (id: number, author: NewAuthor) => {
+export const updateAuthorByID = async (id: string, author: NewAuthor) => {
     const tmp: NewAuthor & SpoofMethod = { _method: "PATCH", ...author };
     const { data } = await axios.postForm<Author>(`/api/authors/${id}`, tmp);
     if (!data) return;
@@ -33,12 +33,12 @@ export const updateAuthorByID = async (id: number, author: NewAuthor) => {
     }
 };
 
-export const removeAuthor = async (id: number) => {
+export const removeAuthor = async (id: string) => {
     const { status } = await axios.delete(`/api/authors/${id}`);
     if (status != 204) return;
     authors.value = authors.value.filter((author) => author.id != id);
 };
 
 export const getAllAuthors = computed(() => authors.value);
-export const getAuthorByID = (id: number) =>
+export const getAuthorByID = (id: string) =>
     computed(() => authors.value.find((author) => author.id == id));

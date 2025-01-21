@@ -16,7 +16,7 @@ if (props.book) {
 } else {
     newBook = {
         title: "",
-        author_id: NaN,
+        author_id: "",
     };
 }
 

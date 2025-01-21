@@ -27,7 +27,6 @@ export const updateBookByID = async (id: string, book: NewBook) => {
     const tmp: NewBook & SpoofMethod = { _method: "PATCH", ...book };
     const { data } = await axios.postForm<Book>(`/api/books/${id}`, tmp);
     if (!data) return;
-    data.author_id = Number(data.author_id);
     const index = books.value.findIndex((book) => book.id == id);
     if (index >= 0) {
         books.value.splice(index, 1, data);
