@@ -19,7 +19,9 @@ const router = useRouter();
             <img :src="'/' + book.cover_path" alt="book cover" />
         </div>
         <div>
-            {{ book.title }}
+            <router-link :to="{ name: 'showBook', params: { id: book.id } }">
+                {{ book.title }}
+            </router-link>
             <br />
             <small
                 >By {{ getAuthorByID(props.book.author_id).value?.name }}</small
