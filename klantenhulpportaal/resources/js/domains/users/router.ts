@@ -1,9 +1,4 @@
+import { addRoutes, createRoute } from "../../services/router";
 import Overview from "./pages/UserOverview.vue";
 
-export default [
-    {
-        path: "/users",
-        name: "userOverview",
-        component: Overview,
-    },
-];
+addRoutes([createRoute("userOverview", "/users", Overview)]);

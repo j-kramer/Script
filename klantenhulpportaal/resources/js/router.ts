@@ -1,18 +1,9 @@
-import { createRouter, createWebHistory } from "vue-router";
-import userRouter from "./domains/users/router";
+import { addRoutes } from "./services/router";
 
-const routes = [
+addRoutes([
     {
         path: "/",
         name: "home",
         redirect: "/users",
     },
-    ...userRouter,
-];
-
-const router = createRouter({
-    history: createWebHistory(),
-    routes,
-});
-
-export default router;
+]);
