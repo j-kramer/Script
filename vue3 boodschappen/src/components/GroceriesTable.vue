@@ -6,6 +6,7 @@ const props = defineProps(['groceries']);
 
 const totalPrice = computed(() => {
     let total = 0;
+    // TODO: overweeg een array.reduce functie
     for (let product of props.groceries) {
         let number = product.amount ?? 0;
         // ignore the product on negative quantities

@@ -7,6 +7,7 @@ function gooi() {
      * if this is used the template does not seems to pick up on the changes in the for loop
      * idk why
      */
+    // TODO: alternatief is om de .length property te setten: dice.value.length 0
     dice.value.splice(0);
 
     for (let index = 0; index < 5; index++) {

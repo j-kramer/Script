@@ -3,6 +3,7 @@ import {ref, computed} from 'vue';
 
 const dice = ref([]);
 
+// TODO: gebruik Engelse namen
 function gooi() {
     dice.value = [];
 

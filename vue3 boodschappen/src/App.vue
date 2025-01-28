@@ -5,6 +5,7 @@ import {RouterLink, RouterView} from 'vue-router';
 <template>
     <h1>Grocery List</h1>
     <nav>
+        <!-- TODO: overweeg het gebruik van route names ipv url's, voor betere onderhoudbaarheid -->
         <RouterLink to="/">Go to Home</RouterLink>
         <RouterLink to="/create">Create a grocery list item</RouterLink>
     </nav>
