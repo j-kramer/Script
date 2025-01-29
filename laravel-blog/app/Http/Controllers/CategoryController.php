@@ -30,6 +30,7 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
+        // TODO: stop validation rules in aparte form validator class
         $validated = $request->validate([
             'name' => 'required|string|max:255',
         ]);

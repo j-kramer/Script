@@ -13,6 +13,9 @@ class HomeServer extends Controller
     /**
      * Handle the incoming request.
      */
+    // TODO: overweeg om homecontroller af te schaffen en alles via de articles controller te doen.
+    // voor filteren van categorieen, search etc. kun je dit evt. met model scope doen:
+    // https://medium.com/@luckys383/laravel-common-filters-using-model-scope-372111e66063
     public function __invoke(Request $request)
     {
 

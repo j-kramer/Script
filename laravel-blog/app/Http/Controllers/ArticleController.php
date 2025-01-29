@@ -21,6 +21,7 @@ class ArticleController extends Controller
      */
     public function index()
     {
+        // vraag: wat is het nut van onderstaande policy?
         Gate::authorize('viewAny', Article::class);
 
         return view('articles.index', [
