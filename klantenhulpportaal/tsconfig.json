@@ -3,9 +3,15 @@
     "compilerOptions": {
         "module": "esnext",
         "target": "esnext",
-        "types": ["vite/client", "node"],
+        "types": [
+            "vite/client",
+            "node"
+        ],
         "moduleResolution": "node",
-        "lib": ["es2017", "dom"],
+        "lib": [
+            "es2017",
+            "dom"
+        ],
         "allowUnreachableCode": false,
         "allowUnusedLabels": false,
         "declaration": true,
@@ -15,9 +21,29 @@
         "noImplicitThis": true,
         "alwaysStrict": true,
         "esModuleInterop": true,
-        "checkJs": true,
+        "allowJs": true,
+        "noEmit": true,
+        "checkJs": false,
         "jsx": "preserve",
-        "resolveJsonModule": true
+        "strictNullChecks": true,
+        "forceConsistentCasingInFileNames": true,
+        "useUnknownInCatchVariables": true,
+        "baseUrl": ".",
+        "paths": {
+            "services/*": ["./resources/js/services/*"],
+            "domains/*": ["./resources/js/domains/*"],
+            // "routes/*": ["./resources/js/routes/*"],
+            // "types/*": ["./resources/js/types/*"],
+            // "components/*": ["./resources/js/components/*"],
+            // "errors/*": ["./resources/js/errors/*"],
+            // "helpers/*": ["./resources/js/helpers/*"],
+            // "factories/*":["./resources/js/factories/*"],
+            // "constants/*":["./resources/js/constants/*"],
+            // "pages/*":["./resources/js/pages/*"],
+            // "images/*":["./resources/images/*"]
+        }
     },
-    "include": ["resources/js/**/*"]
+    "include": [
+        "resources/js/**/*"
+    ]
 }
