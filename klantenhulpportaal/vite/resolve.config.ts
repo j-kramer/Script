@@ -16,7 +16,7 @@ export const resolve = {
         // // general aliases
         services: path.join(srcPath, 'services'),
         // types: path.join(srcPath, 'types'),
-        // errors: path.join(srcPath, 'errors'),
+        errors: path.join(srcPath, 'errors'),
         // helpers: path.join(srcPath, 'helpers'),
         // constants: path.join(srcPath, 'constants'),
         // pages: path.join(srcPath, 'pages'),

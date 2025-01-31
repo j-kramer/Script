@@ -3,15 +3,9 @@
     "compilerOptions": {
         "module": "esnext",
         "target": "esnext",
-        "types": [
-            "vite/client",
-            "node"
-        ],
+        "types": ["vite/client", "node"],
         "moduleResolution": "node",
-        "lib": [
-            "es2017",
-            "dom"
-        ],
+        "lib": ["es2017", "dom"],
         "allowUnreachableCode": false,
         "allowUnusedLabels": false,
         "declaration": true,
@@ -35,7 +29,7 @@
             // "routes/*": ["./resources/js/routes/*"],
             // "types/*": ["./resources/js/types/*"],
             // "components/*": ["./resources/js/components/*"],
-            // "errors/*": ["./resources/js/errors/*"],
+            "errors/*": ["./resources/js/errors/*"]
             // "helpers/*": ["./resources/js/helpers/*"],
             // "factories/*":["./resources/js/factories/*"],
             // "constants/*":["./resources/js/constants/*"],
@@ -43,7 +37,5 @@
             // "images/*":["./resources/images/*"]
         }
     },
-    "include": [
-        "resources/js/**/*"
-    ]
+    "include": ["resources/js/**/*"]
 }
