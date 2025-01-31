@@ -1,7 +1,7 @@
 <template>
-    <h1 class="text-3xl font-bold">Klantenhulpportaal</h1>
+    <h1 class="font-bold text-3xl">Klantenhulpportaal</h1>
     <nav>
-        <RouterLink :to="{ name: 'home' }">Home</RouterLink>
+        <RouterLink :to="{name: 'home'}">Home</RouterLink>
     </nav>
     <main>
         <RouterView />

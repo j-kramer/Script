@@ -11,7 +11,7 @@ import type {NavigationGuard} from 'vue-router';
 
 import {computed, ref} from 'vue';
 
-import {USER_DOMAIN_NAME} from 'domains/user';
+import {USER_DOMAIN_NAME} from 'domains/users';
 import {getRequest, postRequest, registerResponseErrorMiddleware} from 'services/http';
 import {addRoutes, goToRoute, registerBeforeRouteMiddleware} from 'services/router';
 import {clearStorage} from 'services/storage';

@@ -1,5 +1,5 @@
 import type {AxiosError, AxiosRequestConfig, AxiosResponse} from 'axios';
-import type {UserResource} from 'domains/user/types';
+import type {UserResource} from 'domains/users/types';
 import type {LocationQueryValue} from 'vue-router';
 
 export type RequestMiddleware = (request: AxiosRequestConfig) => void;
