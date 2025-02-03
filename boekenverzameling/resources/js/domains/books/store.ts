@@ -24,6 +24,7 @@ export const addBook = async (book: NewBook) => {
 };
 
 export const updateBookByID = async (id: string, book: NewBook) => {
+    // TODO: kies iets duidelijkere naam, bijv. payload ipv tmp
     const tmp: NewBook & SpoofMethod = { _method: "PATCH", ...book };
     const { data } = await axios.postForm<Book>(`/api/books/${id}`, tmp);
     if (!data) return;

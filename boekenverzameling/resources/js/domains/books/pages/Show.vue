@@ -8,7 +8,9 @@ import ReviewList from "../../reviews/components/ReviewList.vue";
 const router = useRouter();
 const route = useRoute();
 
+// TODO: "bookId" is nog iets duidelijker
 let id: string;
+// TODO: (vraag) is onderstaande controle noodzakelijk? (route param lijkt altijd string)
 if (typeof route.params.id == "string") {
     id = route.params.id;
 } else {
@@ -16,7 +18,9 @@ if (typeof route.params.id == "string") {
 }
 const book = getBookByID(id);
 
+// TODO: pagina werkt niet bij harde page reload
 fetchReviews(id);
+// TODO: voorstel: hernoemen naar getReviewsByBookId?
 const reviews = getReviews(id);
 </script>
 
@@ -35,11 +39,13 @@ const reviews = getReviews(id);
             </div>
         </article>
         <div>
-
             <button
-                @click="router.push({ name: 'createReview', params: { id: id } })"
-                >Schrijf een review</button
+                @click="
+                    router.push({ name: 'createReview', params: { id: id } })
+                "
             >
+                Schrijf een review
+            </button>
             <h1>Reviews:</h1>
             <ReviewList v-if="reviews.length" :reviews="reviews" />
             <p v-else>Er zijn geen reviews</p>
