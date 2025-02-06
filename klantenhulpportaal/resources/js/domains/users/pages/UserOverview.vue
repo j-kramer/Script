@@ -5,17 +5,17 @@ userStore.actions.getAll();
 </script>
 
 <template>
-    <table>
+    <table class="border-collapse table-auto w-full">
         <thead>
             <tr>
-                <th>First Name</th>
-                <th>Last Name</th>
+                <th class="text-left">First Name</th>
+                <th class="text-left">Last Name</th>
             </tr>
         </thead>
         <tbody>
             <tr v-for="user in userStore.getters.all.value" :key="user.id">
-                <td>{{ user.first_name }}</td>
-                <td>{{ user.last_name }}</td>
+                <td class="text-left">{{ user.first_name }}</td>
+                <td class="text-left">{{ user.last_name }}</td>
             </tr>
         </tbody>
     </table>
