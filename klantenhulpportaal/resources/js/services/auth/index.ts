@@ -28,7 +28,7 @@ const apiLoggedInCheckRoute = '/me';
 const apiSendResetPasswordEmailRoute = '/send-reset-password-email';
 const apiResetpasswordRoute = '/reset-password';
 
-const goToDefaultLoggedInPage = () => goToRoute('dashboard');
+const goToDefaultLoggedInPage = () => goToRoute('home');
 
 export const goToLoginPage = (from?: string) => goToRoute(LOGIN_ROUTE_NAME, undefined, {from});
 

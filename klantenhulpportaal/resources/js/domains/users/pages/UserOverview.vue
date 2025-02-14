@@ -14,8 +14,8 @@ userStore.actions.getAll();
         </thead>
         <tbody>
             <tr v-for="user in userStore.getters.all.value" :key="user.id">
-                <td class="text-left">{{ user.first_name }}</td>
-                <td class="text-left">{{ user.last_name }}</td>
+                <td class="text-left">{{ user.firstName }}</td>
+                <td class="text-left">{{ user.lastName }}</td>
             </tr>
         </tbody>
     </table>

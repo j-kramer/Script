@@ -14,7 +14,7 @@
 </head>
 
 <body class="font-sans antialiased">
-    <div id="app" class="flex flex-col mx-auto max-w-4xl">
+    <div id="app" class="mx-auto max-w-4xl">
     </div>
 </body>
 

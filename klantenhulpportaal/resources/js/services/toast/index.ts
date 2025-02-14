@@ -46,7 +46,7 @@ createApp({
             return h(
                 'div',
                 {
-                    class: 'position-fixed bottom-0 start-0',
+                    class: 'fixed bottom-0 start-0',
                     style: 'z-index:9999;',
                 },
                 toastMessages,
