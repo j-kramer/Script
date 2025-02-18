@@ -28,7 +28,7 @@
             "domains/*": ["./resources/js/domains/*"],
             // "routes/*": ["./resources/js/routes/*"],
             // "types/*": ["./resources/js/types/*"],
-            // "components/*": ["./resources/js/components/*"],
+            "components/*": ["./resources/js/components/*"],
             "errors/*": ["./resources/js/errors/*"]
             // "helpers/*": ["./resources/js/helpers/*"],
             // "factories/*":["./resources/js/factories/*"],

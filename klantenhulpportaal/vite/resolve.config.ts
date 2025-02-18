@@ -6,7 +6,7 @@ const srcPath = path.resolve('./resources/js');
 export const resolve = {
     alias: {
         // // shared aliases
-        // components: path.join(srcPath, 'components'),
+        components: path.join(srcPath, 'components'),
         // routes: path.join(srcPath, 'routes'),
         // factories: path.join(srcPath, 'factories'),
 
