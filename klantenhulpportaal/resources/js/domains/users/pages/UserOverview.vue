@@ -11,6 +11,7 @@ userStore.actions.getAll();
                 <th class="text-left">Voornaam</th>
                 <th class="text-left">Achternaam</th>
                 <th class="text-left">E-mail</th>
+                <th class="text-left">Telefoonnummer</th>
                 <th class="text-left">Rol</th>
             </tr>
         </thead>
@@ -19,6 +20,7 @@ userStore.actions.getAll();
                 <td class="text-left">{{ user.firstName }}</td>
                 <td class="text-left">{{ user.lastName }}</td>
                 <td class="text-left">{{ user.email }}</td>
+                <td class="text-left">{{ user.phonenumber }}</td>
                 <td class="text-left">{{ user.isAdmin ? 'Admin' : 'Gebruiker' }}</td>
             </tr>
         </tbody>
