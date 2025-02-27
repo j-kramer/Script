@@ -7,7 +7,8 @@ const baseURL = '/api';
 
 const http = axios.create({
     baseURL,
-    withCredentials: false,
+    withCredentials: true,
+    withXSRFToken: true,
     headers: {
         // eslint-disable-next-line @typescript-eslint/naming-convention
         Accept: 'application/json',
