@@ -12,8 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            // length according to standard E.164
-            $table->string('phone_number', length: 15);
+            $table->string('phone_number', length: 20);
         });
     }
 
