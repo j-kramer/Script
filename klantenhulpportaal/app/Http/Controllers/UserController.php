@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\UpdateUserRequest;
 use App\Http\Resources\UserResource;
 use App\Models\User;
+use Illuminate\Support\Facades\Gate;
 
 class UserController extends Controller
 {
@@ -13,6 +14,7 @@ class UserController extends Controller
      */
     public function index()
     {
+        Gate::authorize('viewAny', User::class);
         $users = User::all();
 
         return UserResource::collection($users);
@@ -23,6 +25,8 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
+        Gate::authorize('view', $user);
+
         return new UserResource($user);
     }
 
@@ -31,6 +35,7 @@ class UserController extends Controller
      */
     public function update(UpdateUserRequest $request, User $user)
     {
+        Gate::authorize('update', $user);
         $validated = $request->validated();
         $user->update($validated);
 
@@ -42,6 +47,7 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
+        Gate::authorize('delete', $user);
         $user->delete();
 
         return response()->json(null, 204);
