@@ -13,7 +13,7 @@ import {OVERVIEW_PAGE_NAME} from 'services/router/factory';
                 <RouterLink v-if="isAdmin" :to="{name: USER_DOMAIN_NAME + OVERVIEW_PAGE_NAME}">Gebruikers</RouterLink>
             </div>
             <div>
-                <span class="mr-2">{{ getLoggedInUser().firstName }} {{ getLoggedInUser().lastName }}</span>
+                <span class="mr-2">{{ getLoggedInUser().fullName }}</span>
                 <button @click="logout">Logout</button>
             </div>
         </nav>
