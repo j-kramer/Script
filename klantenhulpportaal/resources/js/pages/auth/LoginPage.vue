@@ -31,7 +31,7 @@ const credentials: LoginCredentials = {
             </FormGroup>
             <FormGroup>
                 <label for="remember">Remember me:</label>
-                <input id="password" v-model="credentials.rememberMe" type="checkbox" />
+                <input id="remember" v-model="credentials.rememberMe" type="checkbox" />
             </FormGroup>
             <template #buttons>
                 <button class="bg-gray-100 px-2">Login</button>
