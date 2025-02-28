@@ -31,11 +31,11 @@ const deleteUser = async function (user: User) {
         </thead>
         <tbody>
             <tr v-for="user in userStore.getters.all.value" :key="user.id">
-                <td class="text-left">{{ user.firstName }}</td>
-                <td class="text-left">{{ user.lastName }}</td>
+                <td class="text-left">{{ user.first_name }}</td>
+                <td class="text-left">{{ user.last_name }}</td>
                 <td class="text-left">{{ user.email }}</td>
-                <td class="text-left">{{ user.phonenumber }}</td>
-                <td class="text-left">{{ user.isAdmin ? 'Admin' : 'Gebruiker' }}</td>
+                <td class="text-left">{{ user.phone_number }}</td>
+                <td class="text-left">{{ user.is_admin ? 'Admin' : 'Gebruiker' }}</td>
                 <td class="flex flex-row justify-center">
                     <button @click="deleteUser(user)"><Delete /></button>
                 </td>

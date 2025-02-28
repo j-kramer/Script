@@ -40,7 +40,7 @@ export const getLoggedInUser = () => {
     return loggedInUser.value;
 };
 
-export const isAdmin = computed(() => loggedInUser.value?.isAdmin);
+export const isAdmin = computed(() => loggedInUser.value?.is_admin);
 
 export const isLoggedIn = computed(() => loggedInUser.value !== undefined);
 

@@ -16,12 +16,12 @@ class UserResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'firstName' => $this->first_name,
-            'lastName' => $this->last_name,
-            'isAdmin' => $this->is_admin,
+            'first_name' => $this->first_name,
+            'last_name' => $this->last_name,
+            'is_admin' => $this->is_admin,
             $this->mergeWhen($request->user()->is_admin, [
                 'email' => $this->email,
-                'phonenumber' => $this->phone_number,
+                'phone_number' => $this->phone_number,
             ]),
             'fullName' => $this->first_name.' '.$this->last_name,
         ];
