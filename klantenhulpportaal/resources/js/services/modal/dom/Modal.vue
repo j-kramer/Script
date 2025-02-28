@@ -17,16 +17,7 @@ const modalSize = {
     <Transition name="modal">
         <div v-if="show" class="modal-mask">
             <div class="modal-container" :class="modalSize[size]">
-                <div class="modal-body">
-                    <slot name="body">default body</slot>
-                </div>
-
-                <div class="modal-footer">
-                    <slot name="footer">
-                        default footer
-                        <button class="modal-default-button" @click="emit('hide')">OK</button>
-                    </slot>
-                </div>
+                <slot />
             </div>
         </div>
     </Transition>
@@ -52,19 +43,6 @@ const modalSize = {
     border-radius: 2px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.33);
     transition: all 0.3s ease;
-}
-
-.modal-header h3 {
-    margin-top: 0;
-    color: #42b983;
-}
-
-.modal-body {
-    margin: 20px 0;
-}
-
-.modal-default-button {
-    float: right;
 }
 
 /*

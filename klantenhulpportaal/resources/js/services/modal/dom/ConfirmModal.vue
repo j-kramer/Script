@@ -1,10 +1,8 @@
 <template>
     <Modal :show="!hideModal" size="md">
-        <template #body>
+        <ButtonLayout>
             <h5>{{ modal.message }}</h5>
-        </template>
-        <template #footer>
-            <div class="flex flex-row justify-evenly">
+            <template #buttons>
                 <button class="bg-gray-50 px-2" @click="resolve(false)">
                     {{ modal.cancelButtonText }}
                 </button>
@@ -12,8 +10,8 @@
                 <button class="bg-gray-100 px-2" type="button" @click="resolve(true)">
                     {{ modal.okButtonText }}
                 </button>
-            </div>
-        </template>
+            </template>
+        </ButtonLayout>
     </Modal>
 </template>
 
@@ -21,6 +19,8 @@
 import type {ConfirmModalData} from '../types';
 
 import {ref} from 'vue';
+
+import ButtonLayout from 'components/layouts/ButtonLayout.vue';
 
 import Modal from './Modal.vue';
 

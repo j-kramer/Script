@@ -1,8 +1,6 @@
 <template>
     <Modal :show="!hideModal" :size="modal.size">
-        <template #body>
-            <component :is="modal.component" :form="modal.form" @submit="submit" @cancel="close" />
-        </template>
+        <component :is="modal.component" :form="modal.form" @submit="submit" @cancel="close" />
     </Modal>
 </template>
 
@@ -10,6 +8,8 @@
 import type {FormModalData} from '../types';
 
 import {ref} from 'vue';
+
+import Modal from './Modal.vue';
 
 const props = defineProps<{modal: FormModalData}>();
 

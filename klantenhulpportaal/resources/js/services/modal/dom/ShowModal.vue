@@ -1,8 +1,6 @@
 <template>
     <Modal :show="!hideModal" :size="modal.size">
-        <template #body>
-            <component :is="modal.component" v-bind="modal.props" @hide="close" />
-        </template>
+        <component :is="modal.component" v-bind="modal.props" @hide="close" />
     </Modal>
 </template>
 
