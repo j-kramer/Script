@@ -6,6 +6,7 @@ use App\Http\Requests\UpdateUserRequest;
 use App\Http\Resources\UserResource;
 use App\Models\User;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Validation\ValidationException;
 
 class UserController extends Controller
 {
@@ -48,6 +49,15 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         Gate::authorize('delete', $user);
+
+        // make sure we don't delete the last admin
+        if ($user->is_admin && User::where('is_admin', true)->count() == 1) {
+            return throw ValidationException::withMessages([
+                'is_admin' => 'Cannot remove the last admin',
+            ],
+            );
+        }
+
         $user->delete();
 
         return response()->json(null, 204);

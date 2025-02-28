@@ -10,12 +10,9 @@ import {userStore} from '..';
 userStore.actions.getAll();
 
 const deleteUser = async function (user: User) {
-    const confirmed = await confirmModal(
-        `Weet je zeker dat je ${user.firstName} ${user.lastName} wilt verwijderen?`,
-        'Verwijderen',
-    );
+    const confirmed = await confirmModal(`Weet je zeker dat je ${user.fullName} wilt verwijderen?`, 'Verwijderen');
     if (!confirmed) return;
-    userStore.actions.delete(user.id);
+    await userStore.actions.delete(user.id);
     successToast('Gebruiker verwijderd');
 };
 </script>
