@@ -37,8 +37,28 @@ class UserController extends Controller
     public function update(UpdateUserRequest $request, User $user)
     {
         Gate::authorize('update', $user);
+
         $validated = $request->validated();
-        $user->update($validated);
+        $user->fill($validated);
+
+        if ($request->user()->is_admin) {
+            $is_admin = $request->boolean('is_admin');
+            $user->is_admin = $is_admin;
+
+            // check if we are removing our admin rights
+            if ($request->user()->is($user) && ! $is_admin) {
+                // check if we are not the last admin
+                if (User::where('is_admin', true)->count() == 1) {
+                    return throw ValidationException::withMessages([
+                        'is_admin' => 'Cannot remove the last admin',
+                    ],
+                    );
+                }
+            }
+
+        }
+
+        $user->save();
 
         return new UserResource($user);
     }
