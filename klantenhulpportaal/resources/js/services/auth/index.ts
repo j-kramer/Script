@@ -128,6 +128,8 @@ export const sendResetPasswordEmail = async (email: string) => {
 export const resetPassword = async (data: ResetPasswordData) => {
     const response = await postRequest(apiResetpasswordRoute, data);
 
+    successToast('Je wachtwoord is succesvol aangepast. Login om verder te gaan.');
+
     goToLoginPage();
 
     return response;
@@ -190,7 +192,7 @@ const forgotPasswordRoute = (forgotPasswordPage: Component) => ({
 });
 
 const resetPasswordRoute = (resetPasswordPage: Component) => ({
-    path: '/wachtwoord-resetten',
+    path: '/wachtwoord-resetten/:token',
     name: RESET_PASSWORD_ROUTE_NAME,
     component: resetPasswordPage,
     meta: authMeta,

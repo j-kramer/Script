@@ -1,15 +1,18 @@
 <script setup lang="ts">
 import type {LoginCredentials} from 'services/auth/types';
+import type {Ref} from 'vue';
+
+import {ref} from 'vue';
 
 import FormGroup from 'components/FormGroup.vue';
 import ButtonLayout from 'components/layouts/ButtonLayout.vue';
-import {login} from 'services/auth';
+import {FORGOT_PASSWORD_ROUTE_NAME, login} from 'services/auth';
 
-const credentials: LoginCredentials = {
+const credentials: Ref<LoginCredentials> = ref({
     email: '',
     password: '',
     rememberMe: true,
-};
+});
 </script>
 
 <template>
@@ -34,7 +37,8 @@ const credentials: LoginCredentials = {
                 <input id="remember" v-model="credentials.rememberMe" type="checkbox" />
             </FormGroup>
             <template #buttons>
-                <button class="bg-gray-100 px-2">Login</button>
+                <RouterLink :to="{name: FORGOT_PASSWORD_ROUTE_NAME}">Wachtwoord vergeten</RouterLink>
+                <button class="bg-gray-100 px-2" type="submit">Login</button>
             </template>
         </ButtonLayout>
     </form>
