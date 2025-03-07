@@ -22,7 +22,7 @@ export const addRoutes = (routes: RouteRecordRaw[]) => {
 
 export const useRouterInApp = (app: App<Element>) => app.use(router);
 
-const createRoute = (name: string, id?: number, query?: LocationQueryRaw) => {
+export const createLocation = (name: string, id?: number, query?: LocationQueryRaw) => {
     const route: RouteLocationRaw = {name};
     if (id) route.params = {id};
     if (query) route.query = query;
@@ -32,36 +32,22 @@ const createRoute = (name: string, id?: number, query?: LocationQueryRaw) => {
 
 export const goToRoute = (name: string, id?: number, query?: LocationQueryRaw) => {
     if (onPage(name) && !query && !id) return;
-    router.push(createRoute(name, id, query));
+    router.push(createLocation(name, id, query));
 };
 
-const beforeRouteMiddleware: NavigationGuard[] = [
-    (to, from) => {
-        const fromQuery = from.query.from;
-        if (fromQuery && typeof fromQuery === 'string') {
-            if (fromQuery === to.fullPath) return false;
-            router.push(fromQuery);
+router.beforeEach((to, from) => {
+    const fromQuery = from.query.from;
+    if (!to.meta.ignoreFrom && fromQuery && typeof fromQuery === 'string') {
+        if (fromQuery === to.fullPath) return true;
 
-            return true;
-        }
-
-        return false;
-    },
-];
-
-router.beforeEach(async (to, from, next) => {
-    for (const middlewareFunc of beforeRouteMiddleware) {
-        // MiddlewareFunc will return true if it encountered problems
-        if (await middlewareFunc(to, from, next)) return next(false);
+        return {path: fromQuery};
     }
 
-    return next();
+    return true;
 });
 
-export const registerBeforeRouteMiddleware = (middleware: NavigationGuard) => beforeRouteMiddleware.push(middleware);
-
-const routerAfterMiddleware: NavigationHookAfter[] = [];
-export const registerAfterMiddleware = (middleware: NavigationHookAfter) => routerAfterMiddleware.push(middleware);
+export const registerBeforeRouteMiddleware = (middleware: NavigationGuard) => router.beforeEach(middleware);
+export const registerAfterMiddleware = (middleware: NavigationHookAfter) => router.afterEach(middleware);
 
 /** Go to the show page for the given module name */
 export const goToShowPage = (moduleName: string, id: number) => goToRoute(moduleName + SHOW_PAGE_NAME, id);

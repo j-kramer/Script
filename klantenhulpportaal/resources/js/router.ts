@@ -1,3 +1,5 @@
+import type {RouteRecordRaw} from 'vue-router';
+
 import {userRoutes} from 'domains/users';
 import {setAuthRoutes} from 'services/auth';
 
@@ -12,7 +14,7 @@ const home: RouteRecordRaw = {
     path: '/',
     name: 'home',
     component: Home,
-    meta: {auth: true, canSeeWhenLoggedIn: true},
+    meta: {requiresAuth: true, requiresAdmin: false, ignoreFrom: true},
 };
 
 const routes = [home, ...userRoutes];

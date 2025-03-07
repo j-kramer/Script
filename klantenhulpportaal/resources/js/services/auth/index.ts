@@ -13,7 +13,7 @@ import {computed, ref} from 'vue';
 
 import {USER_DOMAIN_NAME} from 'domains/users';
 import {getRequest, postRequest, registerResponseErrorMiddleware} from 'services/http';
-import {addRoutes, goToRoute, registerBeforeRouteMiddleware} from 'services/router';
+import {addRoutes, createLocation, goToRoute, registerBeforeRouteMiddleware} from 'services/router';
 import {clearStorage} from 'services/storage';
 import {successToast} from 'services/toast';
 
@@ -44,15 +44,6 @@ export const isAdmin = computed(() => loggedInUser.value?.is_admin);
 
 export const isLoggedIn = computed(() => loggedInUser.value !== undefined);
 
-const onLocation = ref(true);
-
-export const isOnLocation = computed(() => onLocation.value);
-
-export const checkLocation = async () => {
-    const {data} = await getRequest('location');
-    onLocation.value = data.location;
-};
-
 const HTTP_FORBIDDEN = 403;
 const HTTP_UNAUTHORIZED = 401;
 
@@ -68,20 +59,17 @@ const responseErrorMiddleware: ResponseErrorMiddleware = ({response}) => {
 
 registerResponseErrorMiddleware(responseErrorMiddleware);
 
-const beforeMiddleware: NavigationGuard = ({meta, fullPath}) => {
-    if (!isLoggedIn.value && meta.auth) {
-        goToLoginPage(fullPath);
+const beforeMiddleware: NavigationGuard = to => {
+    if (!isLoggedIn.value && to.meta.requiresAuth)
+        return createLocation(LOGIN_ROUTE_NAME, undefined, {from: to.fullPath});
 
-        return true;
-    }
+    /*
+     * we have to give return a location that ignores the from query, otherwise
+     * we might end up looping between redirecting to the from query and this location
+     */
+    if (!isAdmin.value && to.meta.requiresAdmin) return createLocation('home');
 
-    if (isLoggedIn.value && !meta.canSeeWhenLoggedIn) {
-        goToDefaultLoggedInPage();
-
-        return true;
-    }
-
-    return false;
+    return true;
 };
 
 registerBeforeRouteMiddleware(beforeMiddleware);
@@ -171,7 +159,7 @@ export const getUserByToken = async (token: string): Promise<InvitedUser> => {
     return data;
 };
 
-const authMeta = (title: string) => ({auth: false, canSeeWhenLoggedIn: false, title, ignoreFrom: true});
+const authMeta = {requiresAuth: false, requiresAdmin: false, ignoreFrom: true};
 
 export const setAuthRoutes = (
     loginPage: Component,
@@ -191,26 +179,26 @@ const loginRoute = (loginPage: Component) => ({
     path: '/inloggen',
     name: LOGIN_ROUTE_NAME,
     component: loginPage,
-    meta: authMeta('Login'),
+    meta: authMeta,
 });
 
 const forgotPasswordRoute = (forgotPasswordPage: Component) => ({
     path: '/wachtwoord-vergeten',
     name: FORGOT_PASSWORD_ROUTE_NAME,
     component: forgotPasswordPage,
-    meta: authMeta('Wachtwoord vergeten'),
+    meta: authMeta,
 });
 
 const resetPasswordRoute = (resetPasswordPage: Component) => ({
     path: '/wachtwoord-resetten',
     name: RESET_PASSWORD_ROUTE_NAME,
     component: resetPasswordPage,
-    meta: authMeta('Wachtwoord resetten'),
+    meta: authMeta,
 });
 
 const registerRoute = (registerPage: Component) => ({
     path: '/registreren',
     name: REGISTER_ROUTE_NAME,
     component: registerPage,
-    meta: authMeta('Registreren'),
+    meta: authMeta,
 });

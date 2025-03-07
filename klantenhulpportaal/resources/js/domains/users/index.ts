@@ -15,4 +15,6 @@ setTranslation(USER_DOMAIN_NAME, {
 
 export const userStore = storeModuleFactory<User>(USER_DOMAIN_NAME);
 
-export const userRoutes = [createOverviewRoute(USER_DOMAIN_NAME, OverviewPage)];
+const userMeta = {requiresAuth: true, requiresAdmin: true};
+
+export const userRoutes = [createOverviewRoute(USER_DOMAIN_NAME, OverviewPage, userMeta)];
