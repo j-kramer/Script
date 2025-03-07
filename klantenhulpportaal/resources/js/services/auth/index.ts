@@ -123,7 +123,8 @@ export const register = async (data: RegisterData) => {
 
     successToast('Je bent succesvol geregistreerd');
 
-    goToLoginPage();
+    setLoggedInAndUser(response.data.user);
+    goToDefaultLoggedInPage();
 
     return response;
 };
