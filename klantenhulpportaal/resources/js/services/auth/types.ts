@@ -8,8 +8,6 @@ export type ResponseErrorMiddleware = (error: AxiosError) => void;
 
 export type LoggedInUser = User;
 
-export type InvitedUser = Pick<Required<RegisterData>, 'id' | 'first_name' | 'last_name' | 'email'>;
-
 export interface LoginCredentials {
     email: string;
     password: string;

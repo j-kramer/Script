@@ -1,17 +1,9 @@
-import type {
-    InvitedUser,
-    LoggedInUser,
-    LoginCredentials,
-    RegisterData,
-    ResetPasswordData,
-    ResponseErrorMiddleware,
-} from './types';
+import type {LoggedInUser, LoginCredentials, RegisterData, ResetPasswordData, ResponseErrorMiddleware} from './types';
 import type {Component} from 'vue';
 import type {NavigationGuard} from 'vue-router';
 
 import {computed, ref} from 'vue';
 
-import {USER_DOMAIN_NAME} from 'domains/users';
 import {getRequest, postRequest, registerResponseErrorMiddleware} from 'services/http';
 import {addRoutes, createLocation, goToRoute, registerBeforeRouteMiddleware} from 'services/router';
 import {clearStorage} from 'services/storage';
@@ -92,15 +84,6 @@ export const login = async (credentials: LoginCredentials) => {
     return response;
 };
 
-export const guestLogin = async () => {
-    const response = await getRequest('guestLogin');
-
-    setLoggedInAndUser(response.data.user);
-    goToDefaultLoggedInPage();
-
-    return response;
-};
-
 export const logout = async () => {
     const response = await postRequest(apiLogoutRoute, {});
 
@@ -143,22 +126,6 @@ export const register = async (data: RegisterData) => {
     goToLoginPage();
 
     return response;
-};
-
-export const registerWithToken = async (data: RegisterData) => {
-    const response = await postRequest('register-token', data);
-
-    successToast('Je bent succesvol geregistreerd');
-
-    goToLoginPage();
-
-    return response;
-};
-
-export const getUserByToken = async (token: string): Promise<InvitedUser> => {
-    const {data} = await getRequest(`${USER_DOMAIN_NAME}/token/${token}`);
-
-    return data;
 };
 
 const authMeta = {requiresAuth: false, requiresAdmin: false, ignoreFrom: true};
