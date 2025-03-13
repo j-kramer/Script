@@ -1,5 +1,6 @@
 import type {RouteRecordRaw} from 'vue-router';
 
+import {ticketRoutes} from 'domains/tickets';
 import {userRoutes} from 'domains/users';
 import {setAuthRoutes} from 'services/auth';
 
@@ -17,7 +18,7 @@ const home: RouteRecordRaw = {
     meta: {requiresAuth: true, requiresAdmin: false, ignoreFrom: true},
 };
 
-const routes = [home, ...userRoutes];
+const routes = [home, ...ticketRoutes, ...userRoutes];
 
 addRoutes(routes);
 setAuthRoutes(Login, ForgotPasswordPage, ResetPasswordPage, RegisterPage);

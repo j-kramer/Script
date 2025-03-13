@@ -27,5 +27,9 @@ class DatabaseSeeder extends Seeder
         )->create();
 
         User::factory(10)->create();
+
+        $this->call([
+            TicketSeeder::class,
+        ]);
     }
 }
