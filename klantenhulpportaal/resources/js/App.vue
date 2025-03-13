@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import {CATEGORY_DOMAIN_NAME} from 'domains/categories';
 import {TICKET_DOMAIN_NAME} from 'domains/tickets';
 import {USER_DOMAIN_NAME} from 'domains/users';
 import {getLoggedInUser, isAdmin, isLoggedIn, logout} from 'services/auth';
@@ -12,7 +13,12 @@ import {OVERVIEW_PAGE_NAME} from 'services/router/factory';
             <div class="flex flex-row justify-evenly">
                 <RouterLink :to="{name: 'home'}" class="mr-2">Home</RouterLink>
                 <RouterLink :to="{name: TICKET_DOMAIN_NAME + OVERVIEW_PAGE_NAME}" class="mr-2">Tickets</RouterLink>
-                <RouterLink v-if="isAdmin" :to="{name: USER_DOMAIN_NAME + OVERVIEW_PAGE_NAME}">Gebruikers</RouterLink>
+                <RouterLink v-if="isAdmin" :to="{name: USER_DOMAIN_NAME + OVERVIEW_PAGE_NAME}" class="mr-2">
+                    Gebruikers
+                </RouterLink>
+                <RouterLink v-if="isAdmin" :to="{name: CATEGORY_DOMAIN_NAME + OVERVIEW_PAGE_NAME}" class="mr-2">
+                    Categorieën
+                </RouterLink>
             </div>
             <div>
                 <span class="mr-2">{{ getLoggedInUser().fullName }}</span>
