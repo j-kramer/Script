@@ -3,7 +3,7 @@
         <ButtonLayout>
             <h5>{{ modal.message }}</h5>
             <template #buttons>
-                <button class="bg-gray-50 px-2" @click="resolve(false)">
+                <button class="bg-gray-100 px-2" @click="resolve(false)">
                     {{ modal.cancelButtonText }}
                 </button>
 

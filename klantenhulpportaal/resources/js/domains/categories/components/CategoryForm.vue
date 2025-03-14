@@ -10,7 +10,7 @@
                 <textarea id="description" v-model.trim="editable.description" required class="border" />
             </FormGroup>
             <template #buttons>
-                <button class="bg-gray-50 px-2" type="button" @click="emit('cancel')">Annuleren</button>
+                <button class="bg-gray-100 px-2" type="button" @click="emit('cancel')">Annuleren</button>
                 <button class="bg-gray-100 px-2" type="submit">Categorie bewaren</button>
             </template>
         </ButtonLayout>

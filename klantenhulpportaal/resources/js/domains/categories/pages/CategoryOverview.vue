@@ -49,7 +49,7 @@ const deleteCategory = async function (category: Category) {
 </script>
 
 <template>
-    <button @click="addCategory">Nieuwe categorie aanmaken</button>
+    <button class="bg-gray-100 px-2" @click="addCategory">Nieuwe categorie aanmaken</button>
     <table class="border-collapse table-auto w-full">
         <thead>
             <tr>

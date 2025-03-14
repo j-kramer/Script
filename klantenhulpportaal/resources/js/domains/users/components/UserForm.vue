@@ -22,7 +22,7 @@
                 <input id="role" v-model="editable.is_admin" type="checkbox" />
             </FormGroup>
             <template #buttons>
-                <button class="bg-gray-50 px-2" type="button" @click="emit('cancel')">Annuleren</button>
+                <button class="bg-gray-100 px-2" type="button" @click="emit('cancel')">Annuleren</button>
                 <button class="bg-gray-100 px-2" type="submit">Gebruiker bewaren</button>
             </template>
         </ButtonLayout>

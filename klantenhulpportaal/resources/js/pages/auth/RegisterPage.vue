@@ -58,7 +58,7 @@ const submit = function () {
                 />
             </FormGroup>
             <template #buttons>
-                <button class="bg-gray-50 px-2" type="button" @click="goToLoginPage()">Annuleren</button>
+                <button class="bg-gray-100 px-2" type="button" @click="goToLoginPage()">Annuleren</button>
                 <button class="bg-gray-100 px-2" type="submit">Registreren</button>
             </template>
         </ButtonLayout>
