@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type {Category} from '../types';
-import type {Updatable} from 'services/store/types';
+import type {New, Updatable} from 'services/store/types';
 
 import {computed, defineAsyncComponent} from 'vue';
 
@@ -15,6 +15,18 @@ import {categoryStore} from '..';
 
 categoryStore.actions.getAll();
 const categories = computed(() => sortBy(categoryStore.getters.all.value, 'name'));
+
+const addCategory = function () {
+    destroyErrors();
+    formModal(
+        {name: '', description: ''},
+        defineAsyncComponent(() => import('../components/CategoryForm.vue')),
+        async (editedCategory: New<Category>) => {
+            await categoryStore.actions.create(editedCategory);
+            successToast('Categorie aangepast');
+        },
+    );
+};
 
 const editCategory = function (category: Category) {
     destroyErrors();
@@ -37,6 +49,7 @@ const deleteCategory = async function (category: Category) {
 </script>
 
 <template>
+    <button @click="addCategory">Nieuwe categorie aanmaken</button>
     <table class="border-collapse table-auto w-full">
         <thead>
             <tr>
