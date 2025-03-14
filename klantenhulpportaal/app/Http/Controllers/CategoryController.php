@@ -6,7 +6,7 @@ use App\Http\Requests\StoreCategoryRequest;
 use App\Http\Requests\UpdateCategoryRequest;
 use App\Http\Resources\CategoryResource;
 use App\Models\Category;
-use Illuminate\Contracts\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Validation\ValidationException;
@@ -47,6 +47,10 @@ class CategoryController extends Controller
     {
         Gate::authorize('view', $category);
 
+        if (Auth::user()->is_admin) {
+            $$category->loadCount('tickets');
+        }
+
         return new CategoryResource($category);
     }
 
@@ -59,6 +63,10 @@ class CategoryController extends Controller
 
         $validated = $request->validated();
         $category->update($validated);
+
+        if (Auth::user()->is_admin) {
+            $category->loadCount('tickets');
+        }
 
         return new CategoryResource($category);
     }

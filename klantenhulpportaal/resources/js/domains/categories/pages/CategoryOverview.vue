@@ -1,17 +1,32 @@
 <script setup lang="ts">
 import type {Category} from '../types';
+import type {Updatable} from 'services/store/types';
 
-import {computed} from 'vue';
+import {computed, defineAsyncComponent} from 'vue';
 
 import Delete from 'components/icons/Delete.vue';
+import Edit from 'components/icons/Edit.vue';
 import {sortBy} from 'helpers/sort';
-import {confirmModal} from 'services/modal';
+import {destroyErrors} from 'services/error';
+import {confirmModal, formModal} from 'services/modal';
 import {successToast} from 'services/toast';
 
 import {categoryStore} from '..';
 
 categoryStore.actions.getAll();
 const categories = computed(() => sortBy(categoryStore.getters.all.value, 'name'));
+
+const editCategory = function (category: Category) {
+    destroyErrors();
+    formModal(
+        category,
+        defineAsyncComponent(() => import('../components/CategoryForm.vue')),
+        async (editedCategory: Updatable<Category>) => {
+            await categoryStore.actions.update(category.id, editedCategory);
+            successToast('Categorie aangepast');
+        },
+    );
+};
 
 const deleteCategory = async function (category: Category) {
     const confirmed = await confirmModal(`Weet je zeker dat je ${category.name} wilt verwijderen?`, 'Verwijderen');
@@ -37,6 +52,7 @@ const deleteCategory = async function (category: Category) {
                 <td class="text-left">{{ category.description }}</td>
                 <td class="text-center">{{ category.tickets_count ? 'Ja' : 'Nee' }}</td>
                 <td class="flex flex-row justify-center">
+                    <button @click="editCategory(category)"><Edit /></button>
                     <button @click="deleteCategory(category)"><Delete /></button>
                 </td>
             </tr>
