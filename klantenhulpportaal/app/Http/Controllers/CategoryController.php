@@ -6,7 +6,10 @@ use App\Http\Requests\StoreCategoryRequest;
 use App\Http\Requests\UpdateCategoryRequest;
 use App\Http\Resources\CategoryResource;
 use App\Models\Category;
+use Illuminate\Contracts\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Validation\ValidationException;
 
 class CategoryController extends Controller
 {
@@ -17,7 +20,11 @@ class CategoryController extends Controller
     {
         Gate::authorize('viewAny', Category::class);
 
-        return CategoryResource::collection(Category::all());
+        $categories = Category::when(Auth::user()->is_admin, function (Builder $query) {
+            $query->withCount('tickets');
+        })->get();
+
+        return CategoryResource::collection($categories);
     }
 
     /**
@@ -62,6 +69,14 @@ class CategoryController extends Controller
     public function destroy(Category $category)
     {
         Gate::authorize('delete', $category);
+
+        if ($category->tickets()->count() > 0) {
+
+            return throw ValidationException::withMessages([
+                'count' => 'The category is still in use.',
+            ],
+            );
+        }
 
         $category->delete();
 

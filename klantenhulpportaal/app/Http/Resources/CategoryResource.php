@@ -18,6 +18,7 @@ class CategoryResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'description' => $this->description,
+            'tickets_count' => $this->whenHas('tickets_count'),
         ];
     }
 }
