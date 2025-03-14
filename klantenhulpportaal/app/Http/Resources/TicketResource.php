@@ -20,6 +20,7 @@ class TicketResource extends JsonResource
             'content' => $this->content,
             'creator_id' => $this->creator_id,
             'status' => $this->status,
+            'categories' => $this->whenLoaded('categories')->pluck('id'),
             'created_at' => $this->created_at->timestamp,
             'updated_at' => $this->updated_at->timestamp,
         ];

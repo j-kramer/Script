@@ -22,6 +22,7 @@ class StoreTicketRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'categories' => 'nullable|exists:categories,id',
             //
         ];
     }

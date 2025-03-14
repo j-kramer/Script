@@ -9,6 +9,7 @@
                 <th class="text-left">ID</th>
                 <th class="text-left">Status</th>
                 <th class="text-left">Titel</th>
+                <th class="text-left">Categorieën</th>
                 <th class="text-left">Aangemaakt door</th>
                 <th class="text-left">Aangemaakt op</th>
                 <th class="text-left">Laatste update op</th>
@@ -19,6 +20,7 @@
                 <td class="text-left">{{ ticket.id }}</td>
                 <td class="text-left">{{ ticket.status }}</td>
                 <td class="text-left">{{ ticket.title }}</td>
+                <td class="text-left"><CategoryLabelList :category-ids="ticket.categories" /></td>
                 <td class="text-left">{{ userStore.getters.byId(ticket.creator_id).value?.fullName }}</td>
                 <td class="text-left">{{ new Date(ticket.created_at).toLocaleString() }}</td>
                 <td class="text-left">{{ new Date(ticket.updated_at).toLocaleString() }}</td>
@@ -33,6 +35,8 @@ import type {Ticket} from '../types';
 import {computed, ref} from 'vue';
 
 import FormGroup from 'components/FormGroup.vue';
+import {categoryStore} from 'domains/categories';
+import CategoryLabelList from 'domains/categories/components/CategoryLabelList.vue';
 import {userStore} from 'domains/users';
 import {getLoggedInUser} from 'services/auth';
 
@@ -48,5 +52,6 @@ const filteredTickets = computed(() => {
     return props.tickets.filter(ticket => ticket.creator_id === getLoggedInUser().id);
 });
 
+categoryStore.actions.getAll();
 userStore.actions.getAll();
 </script>

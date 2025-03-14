@@ -39,6 +39,10 @@ class TicketController extends Controller
         $validated = $request->validated();
         $ticket = $request->user()->tickets()->make($validated);
 
+        if (isset($validated['categories'])) {
+            $ticket->categories()->attach($validated['categories']);
+        }
+
         return new TicketResource($ticket);
     }
 
@@ -62,8 +66,14 @@ class TicketController extends Controller
         $validated = $request->validated();
         $ticket->update($validated);
 
-        return new TicketResource($ticket);
+        if (isset($validated['categories'])) {
+            $ticket->categories()->sync($validated['categories']);
+        } else {
+            $ticket->categories()->detach();
 
+        }
+
+        return new TicketResource($ticket);
     }
 
     /**
