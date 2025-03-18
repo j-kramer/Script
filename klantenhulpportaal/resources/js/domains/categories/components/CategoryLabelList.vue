@@ -7,14 +7,12 @@ const props = defineProps<{
     categoryIds: number[];
 }>();
 
-const categoryList = computed(() => {
-    if (props.categoryIds.length > 0)
-        return props.categoryIds.map((id: number) => categoryStore.getters.byId(id).value?.name).join(', ');
-
-    return '';
-});
+const categoryList = computed(() => props.categoryIds.map((id: number) => categoryStore.getters.byId(id)?.value));
 </script>
 
 <template>
-    {{ categoryList }}
+    <template v-for="(category, index) in categoryList" :key="category.id">
+        <span :title="category.description">{{ category.name }}</span>
+        <span>{{ index < categoryList.length - 1 ? ', ' : '' }}</span>
+    </template>
 </template>
