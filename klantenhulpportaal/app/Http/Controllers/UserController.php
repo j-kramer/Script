@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\UpdateUserRequest;
 use App\Http\Resources\UserResource;
 use App\Models\User;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Validation\ValidationException;
 
@@ -76,6 +77,16 @@ class UserController extends Controller
                 'is_admin' => 'Cannot remove the last admin',
             ],
             );
+        }
+
+        $hasUnresolvedTickets = $user->tickets()->where(function (Builder $query) {
+            return $query->pending()->orWhere->inProgress();
+        })->exists();
+
+        if ($hasUnresolvedTickets) {
+            return throw ValidationException::withMessages([
+                'tickets' => 'Cannot remove user with unresolved tickets',
+            ]);
         }
 
         $user->delete();

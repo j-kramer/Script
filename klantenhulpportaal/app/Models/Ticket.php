@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\TicketStatus;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -45,5 +46,20 @@ class Ticket extends Model
     public function categories(): BelongsToMany
     {
         return $this->belongsToMany(Category::class);
+    }
+
+    public function scopePending(Builder $query)
+    {
+        $query->where('status', TicketStatus::PENDING);
+    }
+
+    public function scopeInProgress(Builder $query)
+    {
+        $query->where('status', TicketStatus::INPROGRESS);
+    }
+
+    public function scopeResolved(Builder $query)
+    {
+        $query->where('status', TicketStatus::RESOLVED);
     }
 }
