@@ -6,6 +6,7 @@ import {defineAsyncComponent} from 'vue';
 
 import Delete from 'components/icons/Delete.vue';
 import Edit from 'components/icons/Edit.vue';
+import PaginatedTable from 'components/PaginatedTable.vue';
 import {checkIfLoggedIn, getLoggedInUser} from 'services/auth';
 import {destroyErrors} from 'services/error';
 import {confirmModal, formModal} from 'services/modal';
@@ -38,29 +39,24 @@ const deleteUser = async function (user: User) {
 </script>
 
 <template>
-    <table class="border-collapse table-auto w-full">
-        <thead>
-            <tr>
-                <th class="text-left">Voornaam</th>
-                <th class="text-left">Achternaam</th>
-                <th class="text-left">E-mail</th>
-                <th class="text-left">Telefoonnummer</th>
-                <th class="text-left">Rol</th>
-                <th>Acties</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr v-for="user in userStore.getters.all.value" :key="user.id">
-                <td class="text-left">{{ user.first_name }}</td>
-                <td class="text-left">{{ user.last_name }}</td>
-                <td class="text-left">{{ user.email }}</td>
-                <td class="text-left">{{ user.phone_number }}</td>
-                <td class="text-left">{{ user.is_admin ? 'Admin' : 'Gebruiker' }}</td>
-                <td class="flex flex-row justify-center">
-                    <button @click="editUser(user)"><Edit /></button>
-                    <button @click="deleteUser(user)"><Delete /></button>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+    <PaginatedTable :items="userStore.getters.all.value" sorting-key="id">
+        <template #headers>
+            <th class="text-left">Voornaam</th>
+            <th class="text-left">Achternaam</th>
+            <th class="text-left">E-mail</th>
+            <th class="text-left">Telefoonnummer</th>
+            <th class="text-left">Rol</th>
+        </template>
+        <template #item="user">
+            <td class="text-left">{{ user.first_name }}</td>
+            <td class="text-left">{{ user.last_name }}</td>
+            <td class="text-left">{{ user.email }}</td>
+            <td class="text-left">{{ user.phone_number }}</td>
+            <td class="text-left">{{ user.is_admin ? 'Admin' : 'Gebruiker' }}</td>
+        </template>
+        <template #actions="user">
+            <button @click="editUser(user)"><Edit /></button>
+            <button @click="deleteUser(user)"><Delete /></button>
+        </template>
+    </PaginatedTable>
 </template>
