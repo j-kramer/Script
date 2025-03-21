@@ -1,5 +1,5 @@
 <template>
-    <PaginatedTable :items="tickets">
+    <PaginatedTable :items="tickets" sorting-key="created_at" reverse>
         <template #headers>
             <th class="text-left">ID</th>
             <th class="text-left">Status</th>
@@ -22,6 +22,7 @@
 <script setup lang="ts">
 import type {Ticket} from '../types';
 
+import PaginatedTable from 'components/PaginatedTable.vue';
 import {categoryStore} from 'domains/categories';
 import CategoryLabelList from 'domains/categories/components/CategoryLabelList.vue';
 

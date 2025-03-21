@@ -3,7 +3,7 @@
         <label for="role">Show Tickets of all users:</label>
         <input id="role" v-model="showAll" type="checkbox" />
     </FormGroup>
-    <PaginatedTable :items="filteredTickets">
+    <PaginatedTable :items="filteredTickets" sorting-key="created_at" reverse>
         <template #headers>
             <th class="text-left">ID</th>
             <th class="text-left">Status</th>
