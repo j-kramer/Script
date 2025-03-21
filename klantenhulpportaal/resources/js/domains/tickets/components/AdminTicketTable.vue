@@ -19,8 +19,8 @@
             <td class="text-left">{{ ticket.title }}</td>
             <td class="text-left"><CategoryLabelList :category-ids="ticket.categories" /></td>
             <td class="text-left">{{ userStore.getters.byId(ticket.creator_id).value?.fullName }}</td>
-            <td class="text-left">{{ new Date(ticket.created_at).toLocaleString() }}</td>
-            <td class="text-left">{{ new Date(ticket.updated_at).toLocaleString() }}</td>
+            <td class="text-left">{{ beautifyDate(new Date(ticket.created_at)) }}</td>
+            <td class="text-left">{{ beautifyDate(new Date(ticket.updated_at)) }}</td>
         </template>
     </PaginatedTable>
 </template>
@@ -35,6 +35,7 @@ import PaginatedTable from 'components/PaginatedTable.vue';
 import {categoryStore} from 'domains/categories';
 import CategoryLabelList from 'domains/categories/components/CategoryLabelList.vue';
 import {userStore} from 'domains/users';
+import {beautifyDate} from 'helpers/date';
 import {getLoggedInUser} from 'services/auth';
 
 const props = defineProps<{
