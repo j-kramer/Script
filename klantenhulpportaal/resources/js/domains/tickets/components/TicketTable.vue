@@ -10,7 +10,7 @@
         </template>
         <template #item="ticket">
             <td class="text-left">{{ ticket.id }}</td>
-            <td class="text-left">{{ ticket.status }}</td>
+            <td class="text-left">{{ fmtStatus(ticket.status) }}</td>
             <td class="text-left">{{ ticket.title }}</td>
             <td class="text-left"><CategoryLabelList :category-ids="ticket.categories" /></td>
             <td class="text-left">{{ beautifyDate(new Date(ticket.created_at)) }}</td>
@@ -26,6 +26,9 @@ import PaginatedTable from 'components/PaginatedTable.vue';
 import {categoryStore} from 'domains/categories';
 import CategoryLabelList from 'domains/categories/components/CategoryLabelList.vue';
 import {beautifyDate} from 'helpers/date';
+
+import {fmtStatus} from '..';
+
 
 defineProps<{
     tickets: Readonly<Ticket>[];

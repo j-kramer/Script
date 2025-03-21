@@ -15,7 +15,7 @@
         </template>
         <template #item="ticket">
             <td class="text-left">{{ ticket.id }}</td>
-            <td class="text-left">{{ ticket.status }}</td>
+            <td class="text-left">{{ fmtStatus(ticket.status) }}</td>
             <td class="text-left">{{ ticket.title }}</td>
             <td class="text-left"><CategoryLabelList :category-ids="ticket.categories" /></td>
             <td class="text-left">{{ userStore.getters.byId(ticket.creator_id).value?.fullName }}</td>
@@ -37,6 +37,8 @@ import CategoryLabelList from 'domains/categories/components/CategoryLabelList.v
 import {userStore} from 'domains/users';
 import {beautifyDate} from 'helpers/date';
 import {getLoggedInUser} from 'services/auth';
+
+import {fmtStatus} from '..';
 
 const props = defineProps<{
     tickets: Readonly<Ticket>[];

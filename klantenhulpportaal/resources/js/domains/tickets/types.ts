@@ -3,8 +3,14 @@ export interface Ticket {
     title: string;
     content: string;
     creator_id: number;
-    status: 'Pending' | 'In progress' | 'Resolved';
+    status: Status;
     categories: number[];
     created_at: EpochTimeStamp;
     updated_at: EpochTimeStamp;
+}
+
+export enum Status {
+    pending = 'Pending',
+    inProgress = 'In progress',
+    resolved = 'Resolved',
 }
