@@ -2,12 +2,21 @@
 import {computed} from 'vue';
 
 import {categoryStore} from 'domains/categories';
+import {sortBy} from 'helpers/sort';
 
 const props = defineProps<{
     categoryIds: number[];
 }>();
 
-const categoryList = computed(() => props.categoryIds.map((id: number) => categoryStore.getters.byId(id)?.value));
+const categoryList = computed(() => {
+    const categories = [];
+    for (const id of props.categoryIds) {
+        const category = categoryStore.getters.byId(id)?.value;
+        if (category) categories.push(category);
+    }
+
+    return sortBy(categories, 'name');
+});
 </script>
 
 <template>
