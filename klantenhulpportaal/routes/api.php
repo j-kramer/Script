@@ -6,7 +6,7 @@ use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 Route::resource('categories', CategoryController::class)->except('show');
-Route::resource('tickets', TicketController::class)->only('index');
+Route::resource('tickets', TicketController::class)->only(['index', 'show']);
 Route::resource('users', UserController::class)->except('store');
 
 /*
