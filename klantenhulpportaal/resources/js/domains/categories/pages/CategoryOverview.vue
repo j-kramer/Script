@@ -22,7 +22,7 @@ const addCategory = function () {
         defineAsyncComponent(() => import('../components/CategoryForm.vue')),
         async (editedCategory: New<Category>) => {
             await categoryStore.actions.create(editedCategory);
-            successToast('Categorie aangepast');
+            successToast('Categorie aangemaakt');
         },
     );
 };

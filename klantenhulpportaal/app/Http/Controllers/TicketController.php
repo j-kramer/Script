@@ -37,11 +37,15 @@ class TicketController extends Controller
         Gate::authorize('create', Ticket::class);
 
         $validated = $request->validated();
-        $ticket = $request->user()->tickets()->make($validated);
+        $ticket = $request->user()->tickets()->create($validated);
 
-        if (isset($validated['categories'])) {
+        if (count($validated['categories']) > 0) {
             $ticket->categories()->attach($validated['categories']);
         }
+
+        // make sure all attributes and relations are loaded
+        $ticket->refresh();
+        $ticket->loadMissing('categories:id');
 
         return new TicketResource($ticket);
     }
