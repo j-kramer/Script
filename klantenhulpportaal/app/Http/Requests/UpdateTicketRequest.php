@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests;
 
+use App\TicketStatus;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UpdateTicketRequest extends FormRequest
 {
@@ -11,7 +13,7 @@ class UpdateTicketRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,8 +24,10 @@ class UpdateTicketRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'title' => 'required|string|max:255',
+            'content' => 'required|string',
+            'status' => ['sometimes', Rule::enum(TicketStatus::class)],
             'categories' => 'nullable|exists:categories,id',
-            //
         ];
     }
 }

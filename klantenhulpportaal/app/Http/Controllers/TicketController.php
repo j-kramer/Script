@@ -64,7 +64,13 @@ class TicketController extends Controller
         Gate::authorize('update', $ticket);
 
         $validated = $request->validated();
-        $ticket->update($validated);
+        $ticket->fill($validated);
+
+        if (Auth::user()->is_admin) {
+            $ticket->status = $validated['status'];
+        }
+
+        $ticket->save();
 
         if (isset($validated['categories'])) {
             $ticket->categories()->sync($validated['categories']);

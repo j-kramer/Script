@@ -7,6 +7,7 @@
             </small>
             <br />
             <span>Status: {{ fmtStatus(ticket.status) }}</span>
+            <button @click="editStatus(ticket)"><Edit /></button>
             <br />
             <span v-if="ticket.categories.length">
                 Categorieën:
@@ -22,21 +23,28 @@
 </template>
 
 <script setup lang="ts">
-import {computed} from 'vue';
+import type {Ticket} from '../types';
+import type {Updatable} from 'services/store/types';
 
+import {computed, defineAsyncComponent} from 'vue';
+
+import Edit from 'components/icons/Edit.vue';
 import {categoryStore} from 'domains/categories';
 import CategoryLabelList from 'domains/categories/components/CategoryLabelList.vue';
 import {userStore} from 'domains/users';
 import {beautifyDate} from 'helpers/date';
 import {getLoggedInUser, isAdmin} from 'services/auth';
+import {destroyErrors} from 'services/error';
+import {formModal} from 'services/modal';
 import {getCurrentRouteId} from 'services/router';
+import {successToast} from 'services/toast';
 
 import {fmtStatus, ticketStore} from '..';
 
 const id = getCurrentRouteId();
 
-ticketStore.actions.getById(id);
 categoryStore.actions.getAll();
+ticketStore.actions.getById(id);
 if (isAdmin.value) userStore.actions.getAll();
 
 const ticket = ticketStore.getters.byId(id);
@@ -47,7 +55,11 @@ const ticket = ticketStore.getters.byId(id);
 const creatorText = computed(() => {
     if (!ticket || ticket.value.creator_id === getLoggedInUser().id) return '';
 
-    return `door ${userStore.getters.byId(ticket.value.creator_id).value.fullName}`;
+    // check if the user is loaded yet
+    const creator = userStore.getters.byId(ticket.value.creator_id);
+    if (!creator) return '';
+
+    return `door ${creator.value.fullName}`;
 });
 
 const dateText = computed(() => {
@@ -59,6 +71,22 @@ const dateText = computed(() => {
 const editedText = computed(() => {
     if (!ticket || ticket.value.created_at === ticket.value.updated_at) return '';
 
-    return '&middot; edited';
+    return '· edited';
 });
+
+/*
+ * Modals
+ */
+
+const editStatus = function (ticket: Ticket) {
+    destroyErrors();
+    formModal(
+        ticket,
+        defineAsyncComponent(() => import('../components/TicketStatusForm.vue')),
+        async (editedTicket: Updatable<Ticket>) => {
+            await ticketStore.actions.update(ticket.id, editedTicket);
+            successToast('Status aangepast');
+        },
+    );
+};
 </script>
