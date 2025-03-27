@@ -65,7 +65,7 @@ const creatorText = computed(() => {
 const dateText = computed(() => {
     if (!ticket) return;
 
-    return `op ${beautifyDate(new Date(ticket.value.created_at))}`;
+    return `op ${beautifyDate(ticket.value.created_at)}`;
 });
 
 const editedText = computed(() => {

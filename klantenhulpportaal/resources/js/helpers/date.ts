@@ -1,6 +1,15 @@
-export const beautifyDate = (input: string | Date) => {
+export const beautifyDate = (input: number | string | Date) => {
     if (!input) return '';
-    const date = new Date(input);
+
+    let date;
+
+    /*
+     * number is in seconds while the date constructor expects in milliseconds,
+     * so convert the input
+     */
+    // eslint-disable-next-line no-magic-numbers
+    if (typeof input === 'number') date = new Date(input * 1000);
+    else date = new Date(input);
 
     const formattedDate = new Intl.DateTimeFormat('nl-NL', {
         day: '2-digit',

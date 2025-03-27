@@ -19,8 +19,8 @@
             <td class="text-left"><TicketLink :ticket="ticket" /></td>
             <td class="text-left"><CategoryLabelList :category-ids="ticket.categories" /></td>
             <td class="text-left">{{ userStore.getters.byId(ticket.creator_id).value?.fullName }}</td>
-            <td class="text-left">{{ beautifyDate(new Date(ticket.created_at)) }}</td>
-            <td class="text-left">{{ beautifyDate(new Date(ticket.updated_at)) }}</td>
+            <td class="text-left">{{ beautifyDate(ticket.created_at) }}</td>
+            <td class="text-left">{{ beautifyDate(ticket.updated_at) }}</td>
         </template>
         <template #actions="ticket">
             <button @click="goToShowPage(TICKET_DOMAIN_NAME, ticket.id)"><Show /></button>
