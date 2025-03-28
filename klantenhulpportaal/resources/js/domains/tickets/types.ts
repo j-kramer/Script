@@ -3,6 +3,7 @@ export interface Ticket {
     title: string;
     content: string;
     creator_id: number;
+    assignee_id: number | null;
     status: Status;
     categories: number[];
     created_at: EpochTimeStamp;

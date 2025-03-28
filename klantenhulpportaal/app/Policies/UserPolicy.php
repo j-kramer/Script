@@ -11,6 +11,7 @@ class UserPolicy
      */
     public function viewAny(User $user): bool
     {
+        // it is kind of pointless to restrict this to admins, because the id's of users can easily be iterated over
         return $user->is_admin;
     }
 
@@ -19,7 +20,7 @@ class UserPolicy
      */
     public function view(User $user, User $model): bool
     {
-        return $user->is_admin || $user->is($model);
+        return true;
     }
 
     /**

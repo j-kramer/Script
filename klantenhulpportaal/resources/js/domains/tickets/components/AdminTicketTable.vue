@@ -10,6 +10,7 @@
             <th class="text-left">Titel</th>
             <th class="text-left">Categorieën</th>
             <th class="text-left">Aangemaakt door</th>
+            <th class="text-left">Toegewezen aan</th>
             <th class="text-left">Aangemaakt op</th>
             <th class="text-left">Laatste update op</th>
         </template>
@@ -19,6 +20,7 @@
             <td class="text-left"><TicketLink :ticket="ticket" /></td>
             <td class="text-left"><CategoryLabelList :category-ids="ticket.categories" /></td>
             <td class="text-left">{{ userStore.getters.byId(ticket.creator_id).value?.fullName }}</td>
+            <td class="text-left">{{ assigneeName(ticket) }}</td>
             <td class="text-left">{{ beautifyDate(ticket.created_at) }}</td>
             <td class="text-left">{{ beautifyDate(ticket.updated_at) }}</td>
         </template>
@@ -61,4 +63,10 @@ const filteredTickets = computed(() => {
 
 categoryStore.actions.getAll();
 userStore.actions.getAll();
+
+const assigneeName = function (ticket: Ticket) {
+    if (!ticket.assignee_id) return '';
+
+    return userStore.getters.byId(ticket.assignee_id).value?.fullName;
+};
 </script>

@@ -18,6 +18,10 @@ class TicketSeeder extends Seeder
 
         $tickets = Ticket::Factory(20)->create();
 
+        $tickets->merge(Ticket::Factory(5)->inProgress()->create());
+        $tickets->merge(Ticket::Factory(5)->inProgress()->assigned()->create());
+        $tickets->merge(Ticket::Factory(5)->resolved()->assigned()->create());
+
         $tickets->each(function (Ticket $ticket) use (&$categories, &$categoryCount) {
             $ticket->categories()->sync($categories->random(rand(0, $categoryCount)));
         });

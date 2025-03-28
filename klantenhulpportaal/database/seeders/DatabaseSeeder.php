@@ -13,7 +13,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        User::factory(2)->sequence(
+        User::factory(3)->sequence(
             [
                 'first_name' => 'Test',
                 'last_name' => 'User',
@@ -22,6 +22,11 @@ class DatabaseSeeder extends Seeder
                 'first_name' => 'Admin',
                 'last_name' => 'User',
                 'email' => 'admin@example.com',
+                'is_admin' => true,
+            ], [
+                'first_name' => 'Admin2',
+                'last_name' => 'User',
+                'email' => 'admin2@example.com',
                 'is_admin' => true,
             ]
         )->create();

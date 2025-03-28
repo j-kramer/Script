@@ -7,7 +7,10 @@
             </small>
             <br />
             <span>Status: {{ fmtStatus(ticket.status) }}</span>
-            <button @click="editStatus(ticket)"><Edit /></button>
+            <button v-if="isAdmin" @click="editStatus(ticket)"><Edit /></button>
+            <br />
+            <span>Toegewezen aan: {{ assigneeName }}</span>
+            <button v-if="isAdmin" @click="editAssignee(ticket)"><Edit /></button>
             <br />
             <span v-if="ticket.categories.length">
                 Categorieën:
@@ -37,33 +40,44 @@ import {getLoggedInUser, isAdmin} from 'services/auth';
 import {destroyErrors} from 'services/error';
 import {formModal} from 'services/modal';
 import {getCurrentRouteId} from 'services/router';
-import {successToast} from 'services/toast';
+import {infoToast, successToast} from 'services/toast';
 
 import {fmtStatus, ticketStore} from '..';
 
 const id = getCurrentRouteId();
-
-categoryStore.actions.getAll();
-ticketStore.actions.getById(id);
-if (isAdmin.value) userStore.actions.getAll();
-
 const ticket = ticketStore.getters.byId(id);
 
+const fetchTicket = async () => {
+    // fetch the ticket
+    await ticketStore.actions.getById(id);
+
+    // fetch creator data
+    if (ticket.value.creator_id !== getLoggedInUser().id) await userStore.actions.getById(ticket.value.creator_id);
+
+    // fetch assignee data
+    if (ticket.value.assignee_id && ticket.value.assignee_id !== getLoggedInUser().id)
+        await userStore.actions.getById(ticket.value.assignee_id);
+
+    categoryStore.actions.getAll();
+    if (isAdmin.value) userStore.actions.getAll();
+
+    return ticket;
+};
+fetchTicket();
+
 /*
- * Byline computed values
+ * Computed values
  */
 const creatorText = computed(() => {
     if (!ticket || ticket.value.creator_id === getLoggedInUser().id) return '';
 
-    // check if the user is loaded yet
     const creator = userStore.getters.byId(ticket.value.creator_id);
-    if (!creator) return '';
 
-    return `door ${creator.value.fullName}`;
+    return `door ${creator.value?.fullName}`;
 });
 
 const dateText = computed(() => {
-    if (!ticket) return;
+    if (!ticket) return '';
 
     return `op ${beautifyDate(ticket.value.created_at)}`;
 });
@@ -72,6 +86,14 @@ const editedText = computed(() => {
     if (!ticket || ticket.value.created_at === ticket.value.updated_at) return '';
 
     return '· edited';
+});
+
+const assigneeName = computed(() => {
+    if (!ticket || !ticket.value.assignee_id) return 'Niemand';
+
+    const assignee = userStore.getters.byId(ticket.value.assignee_id);
+
+    return assignee.value?.fullName;
 });
 
 /*
@@ -86,6 +108,21 @@ const editStatus = function (ticket: Ticket) {
         async (editedTicket: Updatable<Ticket>) => {
             await ticketStore.actions.update(ticket.id, editedTicket);
             successToast('Status aangepast');
+        },
+    );
+};
+
+const editAssignee = function (ticket: Ticket) {
+    destroyErrors();
+    formModal(
+        ticket,
+        defineAsyncComponent(() => import('../components/TicketAssigneeForm.vue')),
+        async (editedTicket: Updatable<Ticket>) => {
+            await ticketStore.actions.update(ticket.id, editedTicket);
+            if (editedTicket.assignee_id) {
+                const assignee = userStore.getters.byId(editedTicket.assignee_id);
+                successToast(`Ticket toegewezen aan ${assignee.value.fullName}`);
+            } else infoToast('Ticket is niet toegewezen');
         },
     );
 };

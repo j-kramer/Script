@@ -72,6 +72,7 @@ class TicketController extends Controller
 
         if (Auth::user()->is_admin) {
             $ticket->status = $validated['status'];
+            $ticket->assignee_id = $validated['assignee_id'];
         }
 
         $ticket->save();

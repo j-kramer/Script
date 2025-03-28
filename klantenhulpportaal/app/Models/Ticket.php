@@ -42,6 +42,11 @@ class Ticket extends Model
         return $this->belongsTo(User::class, 'creator_id');
     }
 
+    public function assignee(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'assignee_id');
+    }
+
     public function categories(): BelongsToMany
     {
         return $this->belongsToMany(Category::class);

@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\User;
+use App\TicketStatus;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -27,5 +28,32 @@ class TicketFactory extends Factory
             'created_at' => $datetime,
             'updated_at' => $datetime,
         ];
+    }
+
+    public function inProgress(): static
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'status' => TicketStatus::INPROGRESS,
+            ];
+        });
+    }
+
+    public function resolved(): static
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'status' => TicketStatus::RESOLVED,
+            ];
+        });
+    }
+
+    public function assigned(): static
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'assignee_id' => User::where('is_admin', true)->inRandomOrder()->first()->id,
+            ];
+        });
     }
 }

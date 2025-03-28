@@ -22,6 +22,7 @@ const addTicket = function () {
             title: '',
             content: '',
             creator_id: getLoggedInUser().id,
+            assignee_id: null,
             status: Status.pending,
             categories: [],
             created_at: 0,

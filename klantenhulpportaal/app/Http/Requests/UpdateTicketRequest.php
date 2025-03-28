@@ -28,6 +28,7 @@ class UpdateTicketRequest extends FormRequest
             'content' => 'required|string',
             'status' => ['sometimes', Rule::enum(TicketStatus::class)],
             'categories' => 'nullable|exists:categories,id',
+            'assignee_id' => ['nullable', Rule::exists('users', 'id')->where('is_admin', true)],
         ];
     }
 }
