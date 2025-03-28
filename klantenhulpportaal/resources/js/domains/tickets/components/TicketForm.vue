@@ -10,7 +10,7 @@
                 <textarea id="content" v-model.trim="editable.content" required class="border" />
             </FormGroup>
             <FormGroup name="categories">
-                <CategoryInput v-model="editable.categories" />
+                <CategorySelectInput v-model="editable.categories" />
             </FormGroup>
             <template #buttons>
                 <button class="bg-gray-100 px-2" type="button" @click="emit('cancel')">Annuleren</button>
@@ -24,11 +24,12 @@
 import type {Ticket} from '../types';
 import type {New} from 'services/store/types';
 
+import {ref} from 'vue';
+
 import FormGroup from 'components/FormGroup.vue';
 import ButtonLayout from 'components/layouts/ButtonLayout.vue';
-import CategoryInput from 'domains/categories/components/CategoryInput.vue';
+import CategorySelectInput from 'domains/categories/components/CategorySelectInput.vue';
 import {deepCopy} from 'helpers/copy';
-import {ref} from 'vue';
 
 const props = defineProps<{form: New<Ticket>}>();
 

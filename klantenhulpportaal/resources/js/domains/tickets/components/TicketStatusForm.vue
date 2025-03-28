@@ -2,7 +2,7 @@
     <form @submit.prevent="emit('submit', editable)">
         <ButtonLayout>
             <FormGroup name="status">
-                <StatusInput v-model="editable.status" />
+                <StatusSelectInput v-model="editable.status" />
             </FormGroup>
             <template #buttons>
                 <button class="bg-gray-100 px-2" type="button" @click="emit('cancel')">Annuleren</button>
@@ -22,7 +22,7 @@ import FormGroup from 'components/FormGroup.vue';
 import ButtonLayout from 'components/layouts/ButtonLayout.vue';
 import {deepCopy} from 'helpers/copy';
 
-import StatusInput from './StatusInput.vue';
+import StatusSelectInput from './StatusSelectInput.vue';
 
 const props = defineProps<{form: New<Ticket>}>();
 
