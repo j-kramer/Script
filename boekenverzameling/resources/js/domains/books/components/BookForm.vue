@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useRouter } from "vue-router";
 import type { Book, NewBook } from "../types";
-import { getAllAuthors } from "../../authors/store";
+import { fetchAuthors, getAllAuthors } from "../../authors/store";
 
 const props = defineProps<{
     book?: Book;
@@ -24,6 +24,9 @@ function handleFileChange(event: Event) {
     const target = event.target as HTMLInputElement;
     if (target && target.files) newBook.cover = target.files[0];
 }
+
+// make sure authors are fetched, so the drop down is populated
+fetchAuthors();
 </script>
 
 <template>

@@ -4,20 +4,18 @@ import {RouterLink} from 'vue-router';
 import {removeGrocery} from '../store/Groceries';
 const props = defineProps(['groceries']);
 
-const totalPrice = computed(() => {
-    let total = 0;
-    // TODO: overweeg een array.reduce functie
-    for (let product of props.groceries) {
-        let number = product.amount ?? 0;
-        // ignore the product on negative quantities
-        if (number < 0) {
-            continue;
+// TODO: overweeg een array.reduce functie
+// antwoord: done
+const totalPrice = computed(() =>
+    props.groceries.reduce((total, item) => {
+        let number = item.amount ?? 0;
+        // ignore the product on non-positive quantities
+        if (number > 0) {
+            total += item.price * number;
         }
-        total += product.price * number;
-    }
-
-    return total;
-});
+        return total;
+    }, 0),
+);
 </script>
 
 <template>

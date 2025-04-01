@@ -1,18 +1,10 @@
+<script setup lang="ts">
+import NavMenu from "./components/NavMenu.vue";
+</script>
+
 <template>
     <h1>Boekverzameling</h1>
-    <!-- TODO: nav menu kan evt. in apart component -->
-    <nav>
-        <RouterLink class="navLink" to="/">Boekenlijst</RouterLink>
-        <RouterLink class="navLink" :to="{ name: 'createBook' }"
-            >Boek toevoegen</RouterLink
-        >
-        <RouterLink class="navLink" :to="{ name: 'authorOverview' }"
-            >Auteurlijst</RouterLink
-        >
-        <RouterLink class="navLink" :to="{ name: 'createAuthor' }"
-            >Auteur toevoegen</RouterLink
-        >
-    </nav>
+    <NavMenu />
     <main>
         <RouterView />
     </main>

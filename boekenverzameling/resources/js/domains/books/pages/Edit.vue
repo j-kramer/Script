@@ -7,17 +7,11 @@ import { NewBook } from "../types";
 const router = useRouter();
 const route = useRoute();
 
-let id: string;
-if (typeof route.params.id == "string") {
-    id = route.params.id;
-} else {
-    id = route.params.id[0];
-}
-
-const book = getBookByID(id);
+const bookId = route.params.id.toString();
+const book = getBookByID(bookId);
 
 function submit(newBook: NewBook) {
-    updateBookByID(id, newBook);
+    updateBookByID(bookId, newBook);
     router.push({ name: "overview" });
 }
 </script>

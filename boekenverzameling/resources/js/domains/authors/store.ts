@@ -24,8 +24,11 @@ export const addAuthor = async (author: NewAuthor) => {
 };
 
 export const updateAuthorByID = async (id: string, author: NewAuthor) => {
-    const tmp: NewAuthor & SpoofMethod = { _method: "PATCH", ...author };
-    const { data } = await axios.postForm<Author>(`/api/authors/${id}`, tmp);
+    const payload: NewAuthor & SpoofMethod = { _method: "PATCH", ...author };
+    const { data } = await axios.postForm<Author>(
+        `/api/authors/${id}`,
+        payload
+    );
     if (!data) return;
     const index = authors.value.findIndex((author) => author.id == id);
     if (index >= 0) {

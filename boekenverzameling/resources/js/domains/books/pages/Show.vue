@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useRoute, useRouter } from "vue-router";
-import { getBookByID } from "../store";
-import { fetchReviews, getReviews } from "../../reviews/store";
+import { fetchBooks, getBookByID } from "../store";
+import { fetchReviewsByBookId, getReviews } from "../../reviews/store";
 import { getAuthorByID } from "../../authors/store";
 import ReviewList from "../../reviews/components/ReviewList.vue";
 
@@ -9,19 +9,21 @@ const router = useRouter();
 const route = useRoute();
 
 // TODO: "bookId" is nog iets duidelijker
-let id: string;
 // TODO: (vraag) is onderstaande controle noodzakelijk? (route param lijkt altijd string)
-if (typeof route.params.id == "string") {
-    id = route.params.id;
-} else {
-    id = route.params.id[0];
-}
-const book = getBookByID(id);
+// antwoord: volgens de type van params.id kan het ook een array zijn, vandaar de check in
+// de vorige versie
+const bookId = route.params.id.toString();
+const book = getBookByID(bookId);
+const reviews = getReviews(bookId);
 
 // TODO: pagina werkt niet bij harde page reload
-fetchReviews(id);
 // TODO: voorstel: hernoemen naar getReviewsByBookId?
-const reviews = getReviews(id);
+// antwoord: fixed, done
+const fetch = async () => {
+    await fetchBooks();
+    await fetchReviewsByBookId(bookId);
+};
+fetch();
 </script>
 
 <template>

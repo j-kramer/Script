@@ -22,6 +22,7 @@ class ArticleController extends Controller
     public function index()
     {
         // vraag: wat is het nut van onderstaande policy?
+        // antwoord: dat alleen gebruikers die ingelogd zijn, een lijst krijgen met door hun geschreven artikelen
         Gate::authorize('viewAny', Article::class);
 
         return view('articles.index', [

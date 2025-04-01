@@ -3,8 +3,7 @@ import {ref, computed} from 'vue';
 
 const dice = ref([]);
 
-// TODO: gebruik Engelse namen
-function gooi() {
+function throwDice() {
     dice.value = [];
 
     for (let index = 0; index < 8; index++) {
@@ -32,7 +31,7 @@ const diceCounts = computed(() => {
 
 <template>
     <div>
-        <button @click="gooi">Gooi!</button>
+        <button @click="throwDice">Gooi!</button>
         <table>
             <thead>
                 <tr>

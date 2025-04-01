@@ -1,13 +1,11 @@
 <script setup>
 const dice = defineModel();
 
-function gooi() {
-    /*
-     * dice.value = [];
-     * if this is used the template does not seems to pick up on the changes in the for loop
-     * idk why
-     */
+function throwDice() {
     // TODO: alternatief is om de .length property te setten: dice.value.length 0
+    /* antwoord: klopt, het punt is om de array te muteren zodat het leeg is. het
+     * alternatief is om de hele array in 1 keer te vervangen
+     */
     dice.value.splice(0);
 
     for (let index = 0; index < 5; index++) {
@@ -25,7 +23,7 @@ function gooi() {
             </tr>
         </tbody>
     </table>
-    <button @click="gooi">Gooien!</button>
+    <button @click="throwDice">Gooien!</button>
 </template>
 
 <style scoped>

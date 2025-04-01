@@ -38,7 +38,7 @@ class Card {
   }
 
   drawCard(elem, visible) {
-    let div = document.createElement("div");
+    const div = document.createElement("div");
     div.className = "card";
     if (visible) {
       div.innerHTML = this._suit + " " + this._rank;
@@ -60,7 +60,7 @@ class Player {
      */
     const clone = playerTemplate.content.cloneNode(true);
 
-    let nameElem = clone.querySelector(".playerName");
+    const nameElem = clone.querySelector(".playerName");
     nameElem.innerHTML = name + " Kaarten";
 
     this._scoreElem = clone.querySelector(".playerScore");
@@ -83,6 +83,11 @@ class Player {
 
   // TODO: vraag: waarom onderstaande logica niet integreren in de bovenstaande
   // score getter? Dat scheelt een function call in de addCard method
+  /*
+   * antwoord: door de logica in hun eigen functie te stoppen is het duidelijker
+   * wat het doet. De extra functie call maakt hier niet uit, omdat je toch meestal
+   * op de gebruiker wacht en deze logica maar 1 keer per speler beurt wordt uitgevoerd.
+   */
   _calculateScore() {
     let score = 0;
     let nrOfAces = 0;
@@ -149,7 +154,7 @@ class DealerPlayer extends Player {
 
     this._handElem.innerHTML = "";
 
-    let nrOfCards = this._hand.length;
+    const nrOfCards = this._hand.length;
     if (nrOfCards > 0) {
       this._hand[0].drawCard(this._handElem, this._handIsVisible);
       for (let i = 1; i < nrOfCards; i++) {
@@ -174,7 +179,7 @@ class Blackjack {
   }
 
   _initDeck() {
-    let deck = [];
+    const deck = [];
     const suits = ["diamonds", "clubs", "hearts", "spades"];
     const ranks = [2, 3, 4, 5, 6, 7, 8, 9, 10, "jack", "queen", "king", "ace"];
     for (let i = 0; i < suits.length; i++) {
@@ -187,8 +192,9 @@ class Blackjack {
 
   _drawCard(player) {
     // let kan voor const vervangen worden, omdat binnen scope waarde niet wijzigt
-    let cardNr = Math.random() * this._deck.length;
-    let card = this._deck.splice(cardNr, 1)[0];
+    // antwoord: klopt, ik ben het hele bestand doorgegaan en heb het gecorrigeerd
+    const cardNr = Math.random() * this._deck.length;
+    const card = this._deck.splice(cardNr, 1)[0];
     player.addCard(card);
   }
 
@@ -221,7 +227,7 @@ class Blackjack {
 
   hit() {
     this._drawCard(this._player);
-    let score = this._player.score;
+    const score = this._player.score;
     if (score == 21) {
       this._endGame("You win");
     }
@@ -231,12 +237,12 @@ class Blackjack {
   }
 
   pas() {
-    let dealer = this._dealer;
+    const dealer = this._dealer;
 
     dealer.setHandVisible();
 
     let score = dealer.score;
-    let playerScore = this._player.score;
+    const playerScore = this._player.score;
     while (score < 17) {
       if (score == 16 && playerScore == 16) {
         break;
@@ -262,7 +268,7 @@ class Blackjack {
   }
 }
 
-let game = new Blackjack();
+const game = new Blackjack();
 
 dealCardButton.addEventListener("click", () => {
   if (game.canStart()) {

@@ -11,7 +11,7 @@ interface SpoofMethod {
 const reviews = ref<Review[]>([]);
 
 // De functie die de aanvraag met Axios naar de backend stuurt
-export const fetchReviews = async (book_id: string) => {
+export const fetchReviewsByBookId = async (book_id: string) => {
     const { data } = await axios.get<Review[]>(`/api/books/${book_id}/reviews`);
     if (!data) return;
     // probably should save reviews for more than one book at a time
@@ -19,14 +19,20 @@ export const fetchReviews = async (book_id: string) => {
 };
 
 export const addReview = async (review: NewReview) => {
-    const { data } = await axios.postForm<Review>(`/api/books/${review.book_id}/reviews`, review);
+    const { data } = await axios.postForm<Review>(
+        `/api/books/${review.book_id}/reviews`,
+        review
+    );
     if (!data) return;
     reviews.value.push(data);
 };
 
 export const updateReviewByID = async (id: string, review: NewReview) => {
-    const tmp: NewReview & SpoofMethod = { _method: "PATCH", ...review };
-    const { data } = await axios.postForm<Review>(`/api/reviews/${id}`, tmp);
+    const payload: NewReview & SpoofMethod = { _method: "PATCH", ...review };
+    const { data } = await axios.postForm<Review>(
+        `/api/reviews/${id}`,
+        payload
+    );
     if (!data) return;
     const index = reviews.value.findIndex((review) => review.id == id);
     if (index >= 0) {
